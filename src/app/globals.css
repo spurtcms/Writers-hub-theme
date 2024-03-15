@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html {
+    font-family: "Lexend", sans-serif;
+  }
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+  
+}
+
+.text-xss {
+  font-size: 0.8125rem;
+}
+.text-3xxl {
+  font-size: 2rem;
+}
+.text-4xl2 {
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+.text-5xxl {
+  font-size: 3.25rem;
+  line-height: 4.0625rem;
+}
+
+.text-dark {
+  color: #152027;
+}
+.text-grey {
+  color: #525252;
+}
+.text-primary {
+  color: #278BED;
+}
+.text-secondary {
+  color: #2FACD6;
+}
+.border-color {
+  border-color: #EDEDED;
+}
+.tag-bgcolor {
+  background-color: #525252;
+}
+.text-tag-color {
+  color: #B6B6B7;
+}
+.bg-secondary {
+  background-color: #F1FBFF;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.scrollbar-style::-webkit-scrollbar {
+  background: transparent; 
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
