@@ -3,8 +3,9 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from "react";
 import { fetchGraphQl } from '../api/graphicql';
 import Image from 'next/image';
+import NavbarSkeleton from '../utilities/skeleton/NavbarSkeleton';
 
-function Navbar({categories,catNo,setCatNo}) {
+function Navbar({categories,catNo,setCatNo,catLoader,setPostes,setOffset}) {
 
     let scrl = useRef(null);
     const [scrollX, setscrollX] = useState(0);
@@ -51,7 +52,8 @@ function Navbar({categories,catNo,setCatNo}) {
 
   return (
     <div className="flex flex-nowrap flex-row gap-x-2 pb-4 my-10 justify-start  relative">
-
+      {catLoader==true?<>
+<NavbarSkeleton/></>:<>
 
 {scrollX !== 0 && (
         <button
@@ -68,9 +70,9 @@ function Navbar({categories,catNo,setCatNo}) {
   
         {categories?.categoriesList?.categories&&<>
         <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style'>
-            <li onClick={()=>setCatNo(0)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==0?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
+            <li onClick={()=>{setCatNo(0);setPostes([]);setOffset(0)}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==0?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
           {categories?.categoriesList?.categories?.map((data,index)=>(
-                <li key={index} onClick={()=>setCatNo(data.id)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo===data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
+                <li key={index} onClick={()=>{setCatNo(data.id);setPostes([]),setOffset(0)}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo===data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
           
    ))}
   </ul>
@@ -88,7 +90,7 @@ function Navbar({categories,catNo,setCatNo}) {
                   height={15}
                   priority />
         </button>
-        </> )}
+        </> )}</>}
         {/* <a   className={colorChangeAll==false?activeClass:inactiveClass} onClick={()=>handleCatagory("All")}> All </a>
         {categories?.categoriesList?.categories?.map((cdata,ind)=>(
           <a  className={colorChangeSpecific==false&&catNo===cdata.id?activeClass:inactiveClass} onClick={()=>handleCatagory(cdata)}>{cdata?.categoryName}</a>))} */}

@@ -2,17 +2,20 @@ import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import PostSkeleton from '../utilities/skeleton/PostSkeleton'
 
-function Post({postes}) {
+function Post({postes,loader}) {
 
-console.log(postes,"kjnjhj")
+
 const imageLoader = ({src}) => {
   return src
 }
   return (
    <>
-   {postes?.channelEntriesList?.channelEntriesList?.map((data,index)=>(
-         <> {console.log(data,"9jjd")}
+   {loader==true?<>
+   <PostSkeleton/></>:<>
+   {postes?.map((data,index)=>(
+         <>
          {data.coverImage==""||data.coverImage==null||data.coverImage==undefined&&<>
         <div>
         
@@ -67,7 +70,7 @@ const imageLoader = ({src}) => {
         </div>
 
         <div className="border-b border-color block my-8"></div>
-        </>))}
+        </>))}</>}
    </>
   )
 }

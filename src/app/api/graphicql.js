@@ -1,8 +1,9 @@
 import axiosInstance from "./axios";
 
 
-async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos) {
+async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos,setCatLoader) {
   try {
+    setCatLoader(false)
     const response = await axiosInstance.post('', {
       query: GET_POSTS_QUERY_LIST,
       variables: varPos
@@ -15,43 +16,20 @@ async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos) {
   }
 }
 
-export const fetchGraphQl = async (setPostes,GET_POSTS_QUERY_LIST,varPos) => {
+export const fetchGraphQl = async (setPostes,GET_POSTS_QUERY_LIST,varPos,setCatLoader,) => {
   try {
-    const entries = await fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos);
+    const entries = await fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos,setCatLoader);
     // console.log(entries, 'entries');
     // return entries;
     setPostes(entries.data)
+    setCatLoader(false)
+   
   } catch (error) {
     console.error('Error fetching posts:', error);
     throw error; // Re-throw the error for handling elsewhere if needed
   }
 };
 
-// async function fetchGraphQLDataSingle(id) {
-//   try {
-//     const response = await axiosInstance.post('', {
-//       query: GET_POSTS_QUERY_SINGLE,
-//       variables: { "channelEntryId":id }
-//     });
-// // console.log(response,'34343434');
-//     return response.data; 
-//   } catch (error) {
-//     console.error('Error fetching GraphQL data:', error);
-//     throw error; // Re-throw the error for handling elsewhere if needed
-//   }
-// }
-
-// export const fetchGraphQlSingleData = async (setPostesSingle,slug) => {
-//   try {
-//     const entries = await fetchGraphQLDataSingle(slug);
-//     // console.log(entries, 'entries');
-//     // return entries;
-//     setPostesSingle(entries.data)
-//   } catch (error) {
-//     console.error('Error fetching posts:', error);
-//     throw error; // Re-throw the error for handling elsewhere if needed
-//   }
-// };
 
 // async function fetchGraphQLCategoryData () {
 //   try {
@@ -67,7 +45,7 @@ export const fetchGraphQl = async (setPostes,GET_POSTS_QUERY_LIST,varPos) => {
 //   }
 // }
 
-// export const fetchGraphQlCategory = async (setCategories) => {
+// export const fetchGraphQlCategory = async (setCategories,GET_POSTS_QUERY_CATEGORY,variable_category,setCatLoader) => {
 //   try {
 //     const entries = await fetchGraphQLCategoryData();
 //     // console.log(entries, 'entries');
@@ -78,6 +56,34 @@ export const fetchGraphQl = async (setPostes,GET_POSTS_QUERY_LIST,varPos) => {
 //     throw error; // Re-throw the error for handling elsewhere if needed
 //   }
 // };
+
+// async function fetchGraphQLDataSingle(GET_POSTS_QUERY_ALL_LIST,varpos,setLoader) {
+//   try {
+//     setLoader(true)
+//     const response = await axiosInstance.post('', {
+//       query: GET_POSTS_QUERY_SINGLE,
+//       variables: { "channelEntryId":id }
+//     });
+// // console.log(response,'34343434');
+//     return response.data; 
+//   } catch (error) {
+//     console.error('Error fetching GraphQL data:', error);
+//     throw error; // Re-throw the error for handling elsewhere if needed
+//   }
+// }
+
+// export const fetchGraphQlSingleData = async (setPostes,GET_POSTS_QUERY_ALL_LIST,varpos,setLoader) => {
+//   try {
+//     const entries = await fetchGraphQLDataSingle(GET_POSTS_QUERY_ALL_LIST,varpos,setLoader);
+//     // console.log(entries, 'entries');
+//     // return entries;
+//     setPostes(entries.data)
+//   } catch (error) {
+//     console.error('Error fetching posts:', error);
+//     throw error; // Re-throw the error for handling elsewhere if needed
+//   }
+// };
+
 
 
 
