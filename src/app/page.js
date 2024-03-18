@@ -5,7 +5,7 @@ import { fetchGraphQl} from "./api/graphicql";
 import {GET_POSTS_QUERY_ALL_LIST, GET_POSTS_QUERY_CATEGORY, GET_POSTS_QUERY_SPECIFIC_LIST } from "./api/query";
 import Link from "next/link";
 import moment from "moment";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "./components/Navbar";
 import Post from "./components/Post";
 
@@ -18,7 +18,7 @@ export default function Home() {
   const [loader,setLoader]=useState(true)
   const [catLoader,setCatLoader]=useState(true)
   const [offset,setOffset]=useState(0)
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
 
 
   
@@ -26,7 +26,7 @@ export default function Home() {
     let varPos
     if(catNo==0){
       // const params = new URLSearchParams(searchParams.toString())
-      // params.set('query',"")
+      // params.set('',"")
       // window.history.pushState(null, '', `?${''}`)
       varPos={ "limit": 5, "offset": offset}
       fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 

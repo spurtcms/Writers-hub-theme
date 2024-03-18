@@ -1,9 +1,9 @@
 import axiosInstance from "./axios";
 
 
-async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos,setCatLoader) {
+async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos) {
   try {
-    setCatLoader(false)
+    // setCatLoader(false)
     const response = await axiosInstance.post('', {
       query: GET_POSTS_QUERY_LIST,
       variables: varPos
@@ -18,7 +18,7 @@ async function fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos,setCatLoader) {
 
 export const fetchGraphQl = async (setPostes,GET_POSTS_QUERY_LIST,varPos,setCatLoader,) => {
   try {
-    const entries = await fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos,setCatLoader);
+    const entries = await fetchGraphQLData(GET_POSTS_QUERY_LIST,varPos);
     // console.log(entries, 'entries');
     // return entries;
     setPostes(entries.data)

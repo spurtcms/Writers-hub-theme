@@ -13,7 +13,7 @@ export default function Detail({params}) {
   const [postesSingle,setPostesSingle]=useState([])
   const [loader,setLoader]=useState(true)
 
-  console.log(loader,"0kll")
+  
   useEffect(()=>{
     let varSingle={ "channelEntryId":slug }
     fetchGraphQl(setPostesSingle,GET_POSTS_QUERY_SINGLE,varSingle,setLoader)
