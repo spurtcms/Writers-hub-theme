@@ -3,57 +3,79 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from "react";
 import { fetchGraphQl } from '../api/graphicql';
 import Image from 'next/image';
-import NavbarSkeleton from '../utilities/skeleton/NavbarSkeleton';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-function Navbar({categories,catNo,setCatNo,catLoader,setPostes,setOffset}) {
-
+function Navbar({categories,catNo,setCatNo,setPostes,setOffset,scrollX,setscrollX}) {
+    const router=useRouter()
+    const searchParams = useSearchParams()
     let scrl = useRef(null);
-    const [scrollX, setscrollX] = useState(0);
-    const [scrolEnd, setscrolEnd] = useState(false);
-    
-    const slide = (shift) => {
-      scrl.current.scrollLeft += shift;
-      setscrollX(scrollX + shift);
-  
-      if (
-        Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
-        scrl.current.offsetWidth
-      ) {
-        setscrolEnd(true);
-      } else {
-        setscrolEnd(false);
-      }
-    };
-    const scrollCheck = () => {
-      setscrollX(scrl.current.scrollLeft);
-      if (
-        Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
-        scrl.current.offsetWidth
-      ) {
-        setscrolEnd(true);
-      } else {
-        setscrolEnd(false);
-      }
-    };
-    useEffect(()=>{
-        if(scrl.current){
-            if (
-                Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
-                scrl.current.offsetWidth
-              ) {
-                setscrolEnd(true);
-              } else {
-              
-                setscrolEnd(false);
-              }
-        }
-    },[scrl])
+    const [scrolEnd, setscrolEnd] = useState(true);
+    let scroll=searchParams.get("scroll")
 
+
+
+
+const slide = (shift) => {
+  scrl.current.scrollLeft += shift;
+
+  setscrollX(scrollX + shift);
+
+  if (
+    Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
+    scrl.current.offsetWidth
+  ) {
+    setscrolEnd(true);
+  } else {
+    setscrolEnd(false);
+  }
+};
+const scrollCheck = () => {
+  setscrollX(scrl.current.scrollLeft);
+  if (
+    Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
+    scrl.current.offsetWidth
+  ) {
+    setscrolEnd(true);
+  } else {
+    setscrolEnd(false);
+  }
+};
+useEffect(()=>{
+ if(scroll !=null){
+  if(scrl.current){
+    scrl.current.scrollLeft = scroll;
+  }
+ }
+},[scroll,scrl])
+useEffect(()=>{
+    if(scrl.current){
+        if (
+            Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
+            scrl.current.offsetWidth
+          ) {
+            setscrolEnd(true);
+          } else {
+          
+            setscrolEnd(false);
+          }
+    }
+},[scrl])
+
+
+    const handleCatList=(id)=>{
+      setCatNo(id)
+      setPostes([])
+      setOffset(0)
+      if(id==null){
+      router.push(`/`)
+    }else{
+      router.push(`/?catgoId=${id}&scroll=${scrollX}`)
+    }
+    }
 
   return (
     <div className="flex flex-nowrap flex-row gap-x-2 pb-4 my-10 justify-start  relative">
-      {catLoader==true?<>
-<NavbarSkeleton/></>:<>
+
 
 {scrollX !== 0 && (
         <button
@@ -70,9 +92,9 @@ function Navbar({categories,catNo,setCatNo,catLoader,setPostes,setOffset}) {
   
         {categories?.categoriesList?.categories&&<>
         <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style'>
-            <li onClick={()=>{setCatNo(0);setPostes([]);setOffset(0)}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==0?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
+            <li onClick={()=>handleCatList(null)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==null?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
           {categories?.categoriesList?.categories?.map((data,index)=>(
-                <li key={index} onClick={()=>{setCatNo(data.id);setPostes([]),setOffset(0)}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo===data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
+                <li key={index} onClick={()=>handleCatList(data.id)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
           
    ))}
   </ul>
@@ -81,7 +103,7 @@ function Navbar({categories,catNo,setCatNo,catLoader,setPostes,setOffset}) {
  }
   
   {!scrolEnd && (<>
-    {console.log(scrolEnd,"9798kj")}
+ 
         <button
           onClick={() => slide(+50)}
           class="w-2 h-2 absolute top-[0.625rem] right-[-1.438rem]"
@@ -90,18 +112,7 @@ function Navbar({categories,catNo,setCatNo,catLoader,setPostes,setOffset}) {
                   height={15}
                   priority />
         </button>
-        </> )}</>}
-        {/* <a   className={colorChangeAll==false?activeClass:inactiveClass} onClick={()=>handleCatagory("All")}> All </a>
-        {categories?.categoriesList?.categories?.map((cdata,ind)=>(
-          <a  className={colorChangeSpecific==false&&catNo===cdata.id?activeClass:inactiveClass} onClick={()=>handleCatagory(cdata)}>{cdata?.categoryName}</a>))} */}
-          {/* <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Articles </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Blogs </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Career </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Automation </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Managing </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Engineering </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Soft Skills </a>
-          <a href="javascript:void(0)" className="whitespace-nowrap px-6 py-2 rounded-3xl border border-color font-base text-gray-600 leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500"> Design </a> */}
+        </> )}
         </div>
   )
 }

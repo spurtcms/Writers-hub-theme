@@ -21,7 +21,6 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
           LastName
           Email
           MobileNo
-          ProfileImage
         }
       }
     }
@@ -46,13 +45,6 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
         categories{
           categoryName
         }
-        authorDetails{
-          FirstName
-          LastName
-          Email
-          MobileNo
-          ProfileImage
-        }
       }
     }
   }
@@ -71,8 +63,8 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
   `;
   
   
-  export const GET_POSTS_QUERY_SINGLE = `query($channelEntryId: Int!){
-    channelEntryDetail(channelEntryId:$channelEntryId){
+  export const GET_POSTS_QUERY_SINGLE = `query($slug: String!){
+    channelEntryDetail(slug:$slug){
         id
         title
         slug
@@ -92,7 +84,6 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
           LastName
           Email
           MobileNo
-          ProfileImage
         }
       }
     }
