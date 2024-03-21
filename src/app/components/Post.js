@@ -43,7 +43,7 @@ const imageLoader = ({src}) => {
               <p className="text-xss text-tag-color">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
               <p className="text-xss text-tag-color">1 min read</p>
               <p className="text-xss text-tag-color">views 1245</p>
-              <Link href={catNo==null?`/posts/${data?.id}`:`/posts/${data?.id}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary">{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
+              <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary">{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
               {console.log(data,"978knmn")}
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data?.categories.length!=0?data?.categories[0].at(-1).categoryName:""}</div>
             </div>
@@ -54,8 +54,8 @@ const imageLoader = ({src}) => {
             __html: data?.description.replace("display:flex","display:block")
           }}></p>
           </div>
-          <div className="row-start-1 sm:row-start-1" key={data?.id}>
-            <Link href={catNo==null?`/posts/${data?.id}`:`/posts/${data?.id}?catgoId=${catNo}&scroll=${scrollX}`}>
+          <div className="row-start-1 sm:row-start-1" key={data?.slug}>
+            <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`}>
               <Image
               loader={imageLoader}
                 src={data?.coverImage}

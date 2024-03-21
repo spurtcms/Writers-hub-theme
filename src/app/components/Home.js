@@ -18,6 +18,7 @@ function HomeComp() {
     const [scrollX, setscrollX] = useState(0);
     const searchParams = useSearchParams()
     const catgoId=searchParams.get("catgoId")
+
     
 
   
@@ -27,6 +28,7 @@ function HomeComp() {
         varPos={ "limit": 5, "offset": offset}
         fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
       }else{
+        setPostes([])
         setCatNo(catgoId)
         varPos={ "limit": 5, "offset": offset,"categoryId":catgoId}
         fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
@@ -39,9 +41,23 @@ function HomeComp() {
         
         fetchGraphQl(setCategories,GET_POSTS_QUERY_CATEGORY,variable_category,setCatLoader)
  
-    },[catgoId,offset])
+    },[catgoId])
 
 
+    useEffect(()=>{
+      let varPos
+      if(catgoId==null){
+        // setCatNo(catgoId)
+        varPos={ "limit": 5, "offset": offset}
+        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
+      }else{
+        // setCatNo(catgoId)
+        varPos={ "limit": 5, "offset": offset,"categoryId":catgoId}
+        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
+      }
+    },[offset])
+
+console.log(postes,"iuyih")
 
   const handleLoad=(data)=>{
   
