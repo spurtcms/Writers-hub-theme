@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header";
+import { DarkThemeProvider } from "./utilities/DarkThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,13 +15,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
       </head>
       <body>
       <main className="xl:py-6 sm:py-4 xl:px-0 px-6 py-6 border-b border-color border-solid">
+      <DarkThemeProvider>
         <Header/>
       {children}
+      </DarkThemeProvider>
       </main> 
       </body>
     </html>

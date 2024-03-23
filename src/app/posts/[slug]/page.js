@@ -45,7 +45,7 @@ export default function Detail({params}) {
             <p className="text-base text-tag-color">{moment(postesSingle?.channelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
             <p className="text-base text-tag-color">1 min read</p>
             <p className="text-base text-tag-color">views 1245</p>
-            <a href="javascrip:void(0)" className="text-base text-primary">{postesSingle?.channelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.channelEntryDetail?.authorDetails?.LastName}</a>
+            <a className="text-base text-primary">{postesSingle?.channelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.channelEntryDetail?.authorDetails?.LastName}</a>
            
             <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{postesSingle?.channelEntryDetail?.categories.length!=0&&postesSingle?.channelEntryDetail?.categories[0].at(-1).categoryName}</div>
           </div>
@@ -57,7 +57,6 @@ export default function Detail({params}) {
                 loader={imageLoader}
                 src={postesSingle?.channelEntryDetail?.coverImage}
                 alt="spurtCMS card image"
-                className="dark:invert"
                 width={10000}
                 height={10000}
                 priority

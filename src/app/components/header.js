@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ThemeSwitch from "../utilities/ThemeSwitch";
 
 export default function Header() {
   return (
@@ -9,7 +10,8 @@ export default function Header() {
             <img src="/img/logo.svg" className="w-48 md:w-auto" />
         </a>
     </div> */}
-<div className="container mx-auto max-w-screen-xl">
+    {/* <nav className="flex items-center justify-between  py-6 sm:px-20 px-6 sm:px-10 max-w-screen-2xl m-auto "> */}
+<div className="container mx-auto max-w-screen-xl flex justify-between">
 <Link href={"/"} className="inline-block">
             
             <Image
@@ -20,7 +22,19 @@ export default function Header() {
               height={32}
               priority
             /></Link>
+<ul className="list-none flex gap-4 items-center">
+                        
+                        <li>
+                            {/* <button className="py-1.5" ><img src="/images/dark.svg"></img></button> */}
+                            <ThemeSwitch />
+                        </li>
+                    
+                    </ul>
+
             </div>
+
+            
+                    {/* </nav> */}
 </header>
   );
 }
