@@ -17,14 +17,14 @@ function HomeComp() {
     const [offset,setOffset]=useState(0)
     const [scrollX, setscrollX] = useState(0);
     const searchParams = useSearchParams()
-    const catgoId=searchParams.get("catgoId")
-
+    let catgoId=searchParams.get("catgoId")
     
 
   
     useEffect(()=>{
       let varPos
       if(catgoId==null){
+        setPostes([])
         varPos={ "limit": 5, "offset": offset}
         fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
       }else{
@@ -36,7 +36,7 @@ function HomeComp() {
 
 
 
-      let variable_category={"limit": 10, "offset":0,"hierarchylevel": 0}
+      let variable_category={"limit": 50, "offset":0,"hierarchylevel": 0}
     
         
         fetchGraphQl(setCategories,GET_POSTS_QUERY_CATEGORY,variable_category,setCatLoader)
@@ -46,6 +46,7 @@ function HomeComp() {
 
     useEffect(()=>{
       let varPos
+      
       if(catgoId==null){
         // setCatNo(catgoId)
         varPos={ "limit": 5, "offset": offset}
@@ -57,7 +58,7 @@ function HomeComp() {
       }
     },[offset])
 
-console.log(postes,"iuyih")
+
 
   const handleLoad=(data)=>{
   
@@ -66,7 +67,7 @@ console.log(postes,"iuyih")
   setPostes(postesArr)
   }
 
-  console.log(postes,"jkjkjk")
+
   
     const handleScroll = (e) => {
   
@@ -81,7 +82,7 @@ console.log(postes,"iuyih")
   
     useEffect(() => {
       window.addEventListener("scroll", handleScroll);
-    }, []);
+    }, [handleScroll]);
   
   
     return (
@@ -95,7 +96,7 @@ console.log(postes,"iuyih")
 
         <NavbarSkeleton/>
         </div>:
-         <Navbar categories={categories} catNo={catNo} setCatNo={setCatNo}  setPostes={setPostes} setOffset={setOffset} searchParams={searchParams}  scrollX={scrollX} setscrollX={setscrollX}/>}
+         <Navbar categories={categories} catNo={catNo} setCatNo={setCatNo}  setPostes={setPostes} setOffset={setOffset} searchParams={searchParams}  scrollX={scrollX} setscrollX={setscrollX} catgoId={catgoId}/>}
           {/* nav */}
   
           <Post postes={postes} loader={loader} catNo={catNo} scrollX={scrollX}/>

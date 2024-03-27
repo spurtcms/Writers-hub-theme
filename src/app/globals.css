@@ -95,3 +95,11 @@ body {
 .dark .text-current{
   color: rgb(156 163 175);
 }
+
+.dark .text-white{
+  filter:invert(100%) saturate(0%) hue-rotate(0deg);
+}
+
+.dark .text-gray-600{
+  color:rgb(156 163 175)
+}

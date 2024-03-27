@@ -5,7 +5,7 @@ import { fetchGraphQl } from '../api/graphicql';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-function Navbar({categories,catNo,setCatNo,setPostes,setOffset,scrollX,setscrollX}) {
+function Navbar({categories,catNo,setCatNo,setPostes,setOffset,scrollX,setscrollX,catgoId}) {
     const router=useRouter()
     const searchParams = useSearchParams()
     let scrl = useRef(null);
@@ -66,12 +66,14 @@ useEffect(()=>{
       setCatNo(id)
       setPostes([])
       setOffset(0)
+      catgoId=id?.toString()
       if(id==null){
       router.push(`/`)
     }else{
       router.push(`/?catgoId=${id}&scroll=${scrollX}`)
     }
     }
+    
 
   return (
     <div className="flex flex-nowrap flex-row gap-x-2 pb-4 my-10 justify-start  relative">
@@ -92,9 +94,9 @@ useEffect(()=>{
   
         {categories?.categoriesList?.categories&&<>
         <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style'>
-            <li onClick={()=>handleCatList(null)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==null?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
+            <li onClick={()=>handleCatList(null)} style={{pointerEvents:catNo==null?"none":""}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId==null?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
           {categories?.categoriesList?.categories?.map((data,index)=>(
-                <li key={index} onClick={()=>handleCatList(data.id)} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catNo==data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
+                <li key={index} onClick={()=>handleCatList(data.id)} style={{pointerEvents:data.id==catNo?"none":""}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId==data.id?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
           
    ))}
   </ul>

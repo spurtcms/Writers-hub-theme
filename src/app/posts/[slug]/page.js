@@ -41,7 +41,7 @@ export default function Detail({params}) {
           
 
           <div className="flex justify-start flex-wrap items-center gap-x-4">
-          <Link href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back-arrow.png"/></Link>
+          <Link href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></Link>
             <p className="text-base text-tag-color">{moment(postesSingle?.channelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
             <p className="text-base text-tag-color">1 min read</p>
             <p className="text-base text-tag-color">views 1245</p>
