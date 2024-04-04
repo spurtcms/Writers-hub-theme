@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useState, useRef } from "react";
-import { fetchGraphQl } from '../api/graphicql';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 

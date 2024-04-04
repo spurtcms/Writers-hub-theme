@@ -67,6 +67,8 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
     channelEntryDetail(slug:$slug){
         id
         title
+        metaTitle
+        metaDescription
         slug
         description
         userId

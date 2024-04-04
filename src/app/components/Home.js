@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { fetchGraphQl } from "../api/graphicql";
+import { fetchGraphQLCatgoData, fetchGraphQLDa } from "../api/graphicql";
 import { GET_POSTS_QUERY_ALL_LIST, GET_POSTS_QUERY_CATEGORY } from "../api/query";
 import Navbar from "./Navbar";
 import Post from "./Post";
@@ -20,55 +20,77 @@ function HomeComp() {
     let catgoId=searchParams.get("catgoId")
     
 
+    const postData = async ()=>{
   
-    useEffect(()=>{
+      let varPos
+          if(catgoId==null){
+            setPostes([])
+            setLoader(true)
+            varPos={ "limit": 10, "offset": offset}
+            let postData= await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
+            handleLoad(postData.data)
+            setLoader(false) 
+          }else{
+            setLoader(true)
+            setPostes([])
+            setCatNo(catgoId)
+            varPos={ "limit": 10, "offset": offset,"categoryId":catgoId}
+            let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
+            handleLoad(postData.data)
+            setLoader(false)
+    
+          }
+        
+    }
+
+    const offsetData = async ()=>{
       let varPos
       if(catgoId==null){
-        setPostes([])
-        varPos={ "limit": 5, "offset": offset}
-        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
+        varPos={ "limit": 10, "offset": offset}
+        let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
+        handleLoad(PostData.data) 
+        setLoader(false)
       }else{
-        setPostes([])
-        setCatNo(catgoId)
-        varPos={ "limit": 5, "offset": offset,"categoryId":catgoId}
-        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
+        varPos={ "limit": 10, "offset": offset,"categoryId":catgoId}
+        let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
+        handleLoad(PostData.data) 
+        setLoader(false)
       }
-
-
-
-      let variable_category={"limit": 50, "offset":0,"hierarchylevel": 0}
+    }
+    
+    const categoryData = async ()=>{
+      // setCatLoader(true)
+      let variable_category={"limit": 50, "offset":0,"hierarchylevel":0}
     
         
-        fetchGraphQl(setCategories,GET_POSTS_QUERY_CATEGORY,variable_category,setCatLoader)
- 
+        let catgeory = await fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category)
+        setCategories(catgeory.data)
+        setCatLoader(false)
+    }
+
+  
+    useEffect(()=>{
+      postData()
+      categoryData()
     },[catgoId])
 
 
     useEffect(()=>{
-      let varPos
-      
-      if(catgoId==null){
-        // setCatNo(catgoId)
-        varPos={ "limit": 5, "offset": offset}
-        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
-      }else{
-        // setCatNo(catgoId)
-        varPos={ "limit": 5, "offset": offset,"categoryId":catgoId}
-        fetchGraphQl(handleLoad,GET_POSTS_QUERY_ALL_LIST,varPos,setLoader) 
-      }
+      offsetData()
     },[offset])
 
-
+    useEffect(()=>{
+      categoryData()
+    },[])
 
   const handleLoad=(data)=>{
-  
   let postesArr=postes.concat(data?.channelEntriesList?.channelEntriesList)
   
   setPostes(postesArr)
   }
 
 
-  
+
     const handleScroll = (e) => {
   
       const scrollHeight = e.target.documentElement.scrollHeight;
@@ -76,7 +98,7 @@ function HomeComp() {
         e.target.documentElement.scrollTop + window.innerHeight
       );
       if (currentHeight + 1 >= scrollHeight) {  
-        setOffset(offset+5) 
+        setOffset(offset+10) 
       }
     };
   
