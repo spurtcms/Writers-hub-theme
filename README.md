@@ -1,4 +1,4 @@
-# Blog generated uusing spurtCMS with Next.js 
+# Blog generated using spurtCMS with Next.js 
 
 ![Screenshot of spurtCMS using Presentation Tool to do Visual Editing](https://www.spurtcms.com/spurtcms-starter-template.jpg)
 
