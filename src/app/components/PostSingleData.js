@@ -22,7 +22,7 @@ function PostSingleData({params}) {
       // setLoader(false)
       let varSingle={ "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
-      setPostesSingle(postSingle.data)
+      setPostesSingle(postSingle)
       setLoader(false)
     }
     

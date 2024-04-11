@@ -44,7 +44,7 @@ const imageLoader = ({src}) => {
               <p className="text-xss text-tag-color text-current">1 min read</p>
               <p className="text-xss text-tag-color text-current">views 1245</p>
               <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary">{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
-              {console.log(data,"978knmn")}
+              
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data?.categories.length!=0?data?.categories[0].at(-1).categoryName:""}</div>
             </div>
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline">
