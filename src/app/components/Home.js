@@ -1,5 +1,4 @@
 'use client'
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -9,7 +8,7 @@ import Post from "./Post";
 import NavbarSkeleton from "../utilities/skeleton/NavbarSkeleton";
 import { fetchGraphQLCatgoData, fetchGraphQLDa } from "../api/graphicql";
 
-function HomeComp() {
+function HomeComp({posData}) {
     const [postes,setPostes]=useState([])
     const [categories,setCategories]=useState([])
     const [catNo,setCatNo]=useState(null)
