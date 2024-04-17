@@ -21,7 +21,7 @@ const imageLoader = ({src}) => {
         
           <div className="flex justify-start flex-wrap items-center gap-x-4">
             <p className="text-base text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
-            <p className="text-base text-tag-color text-current">{data?.readingTime} min read</p>
+            <p className="text-base text-tag-color text-current">{Math.floor(Math.random(data?.readingTime) * 10)} min read</p>
             <p className="text-base text-tag-color text-current">views {data?.viewCount}</p>
             <a href="javascrip:void(0)" className="text-base text-primary">{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</a>
             <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{data?.categories[0].at(-1).categoryName}</div>
@@ -41,7 +41,7 @@ const imageLoader = ({src}) => {
           <div className="col-span-2 row-start-2 sm:row-start-1">
             <div className="flex justify-start flex-wrap items-center gap-x-4">
               <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
-              <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
+              <p className="text-xss text-tag-color text-current">{Math.floor(Math.random(data?.readingTime) * 10)} min read</p>
               <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
               <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary">{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
               

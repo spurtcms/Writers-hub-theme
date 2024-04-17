@@ -53,7 +53,7 @@ function PostSingleData({params}) {
           <div className="flex justify-start flex-wrap items-center gap-x-4">
           <Link href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></Link>
             <p className="text-base text-tag-color">{moment(postesSingle?.channelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
-            <p className="text-base text-tag-color">{postesSingle?.channelEntryDetail?.readingTime} min read</p>
+            <p className="text-base text-tag-color">{Math.floor(Math.random(postesSingle?.channelEntryDetail?.readingTime) * 10)} min read</p>
             <p className="text-base text-tag-color">views {postesSingle?.channelEntryDetail?.viewCount}</p>
             <a className="text-base text-primary">{postesSingle?.channelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.channelEntryDetail?.authorDetails?.LastName}</a>
            
