@@ -16,7 +16,7 @@ export async function fetchGraphQLDa (GET_POSTS_QUERY_LIST,varPos) {
       })
     });
     // console.log(entries.data,"juuuu")
-   return entries.data
+   return entries?.data
    
   } catch (error) {
     throw error;

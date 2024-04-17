@@ -11,6 +11,8 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
         isActive
         coverImage
         categoriesId
+        viewCount
+        readingTime
         createdOn
         featuredEntry
         categories{
@@ -76,6 +78,8 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
         status
         isActive
         coverImage
+        viewCount
+        readingTime
         categoriesId
         createdOn
         categories{
