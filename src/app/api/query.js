@@ -95,3 +95,9 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
     }
   `;
   
+  export const GET_COUNT = `mutation($entryId:Int!){
+    updateChannelEntryViewCount(
+    entryId:$entryId
+      )
+}
+  `;
