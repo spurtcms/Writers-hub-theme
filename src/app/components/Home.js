@@ -25,14 +25,14 @@ function HomeComp({posData}) {
       let varPos
           if(catgoId==null){
             setLoader(true)
-            varPos={ "limit": 10, "offset": offset}
+            varPos={ "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true}}
             let postData= await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
             handleLoad(postData)
             setLoader(false) 
           }else{
             setLoader(true)
             setCatNo(catgoId)
-            varPos={ "limit": 10, "offset": offset,"categoryId":catgoId}
+            varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
             let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
             handleLoad(postData)
             setLoader(false)
@@ -45,13 +45,13 @@ function HomeComp({posData}) {
       if(offset!=0){
       let varPos
       if(catgoId==null){
-        varPos={ "limit": 10, "offset": offset}
+        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true}}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
         console.log(PostData,"PostData")
         handleLoad(PostData) 
         setLoader(false)
       }else{
-        varPos={ "limit": 10, "offset": offset,"categoryId":catgoId}
+        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
         handleLoad(PostData) 
         setLoader(false)
@@ -60,7 +60,7 @@ function HomeComp({posData}) {
     }
     
     const categoryData = async ()=>{
-      let variable_category={"limit": 50, "offset":0,"hierarchylevel":0}
+      let variable_category={"limit": 50, "offset":0,"hierarchylevel":0,}
     
         
         let catgeory = await fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category)

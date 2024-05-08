@@ -8,29 +8,34 @@ import DetailPageSkeleton from "@/app/utilities/skeleton/DetailPageSkeleton";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-function PostSingleData({params}) {
+function PostSingleData({postSingle,params}) {
 
     const {slug}=params
     const searchParams = useSearchParams()
-    const [postesSingle,setPostesSingle]=useState([])
+    const [postesSingle,setPostesSingle]=useState(postSingle)
     const [loader,setLoader]=useState(true)
     let cateId=searchParams.get("catgoId")
     let scrollX=searchParams.get("scroll")
     
   
     const loadmore = async () =>{
-      // setLoader(false)
+      if(postSingle){
+        setLoader(false)
+      }
+      
+    }
+    
+    const reload = async ()=>{
       let varSingle={ "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
       setPostesSingle(postSingle)
       setLoader(false)
     }
-    
   
     useEffect(()=>{
       loadmore()
+      reload()
     },[])
-  
   
   
     const imageLoader = ({src}) => {
