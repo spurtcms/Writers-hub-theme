@@ -8,6 +8,7 @@ import DetailPageSkeleton from "@/app/utilities/skeleton/DetailPageSkeleton";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { imgaeUrl } from "../utilities/ImagePath";
+import Header from "./header";
 
 function PostSingleData({postSingle,params}) {
 
@@ -15,6 +16,10 @@ function PostSingleData({postSingle,params}) {
     const searchParams = useSearchParams()
     const [postesSingle,setPostesSingle]=useState(postSingle)
     const [loader,setLoader]=useState(true)
+    const [catNo,setCatNo]=useState()
+    const [postes,setPostes]=useState()
+    const [offset,setOffset]=useState()
+    
     let cateId=searchParams.get("catgoId")
     let scrollX=searchParams.get("scroll")
     
@@ -43,6 +48,7 @@ function PostSingleData({postSingle,params}) {
       return src
     }
   return (<>
+  <Header catNo={catNo} setCatNo={setCatNo} setPostes={setPostes} setOffset={setOffset}/>
     {loader==true?<>
     
         <DetailPageSkeleton/>

@@ -7,7 +7,7 @@ import { fetchGraphQLDa } from '../api/graphicql'
 import { GET_COUNT } from '../api/query'
 import { imgaeUrl } from '../utilities/ImagePath'
 
-function Post({postes,loader,catNo,scrollX}) {
+function Post({postes,loader,catNo,setCatNo,setPostes,setOffset,scrollX}) {
 
 const imageLoader = ({src}) => {
   return src
@@ -21,7 +21,24 @@ useEffect(()=>{
   countData()
 },[])
 
+const handleHomePage=()=>{
+      setCatNo(null)
+      setPostes([])
+      setOffset(0)
+}
 
+
+// for(let i=0;i<postes.length;i++){
+//   for(let j=1;j<postes.length;j++){
+//     if(postes[i]!=postes[j])
+//     {
+//       console.log(postes,'asdasdasdasd');
+//     }
+//   }
+// }
+
+// const postesFilter = [...new Set(postes.map(JSON.stringify))].map(JSON.parse);
+// console.log(postesFilter,'postesww');
   return (
    <>
    {loader==true?<>
@@ -104,7 +121,7 @@ useEffect(()=>{
                         {/* {search ? "No matching search results" : "No Listing Yet !"} */}
                         No Listing Yet !
                     </h1>
-                    <Link href='/' className='h-[2.5rem] grid place-items-center bg-black text-base text-white px-4 mt-4 rounded-md dark:bg-white dark:text-black'>Go to Home Page</Link>
+                    <Link href='/' onClick={()=>handleHomePage()} className='h-[2.5rem] grid place-items-center bg-black text-base text-white px-4 mt-4 rounded-md dark:bg-white dark:text-black'>Go to Home Page</Link>
                 </div>
             </div>
             </>

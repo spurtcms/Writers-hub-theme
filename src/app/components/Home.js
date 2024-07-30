@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Post from "./Post";
 import NavbarSkeleton from "../utilities/skeleton/NavbarSkeleton";
 import { fetchGraphQLCatgoData, fetchGraphQLDa } from "../api/graphicql";
+import Header from "./header";
 
 function HomeComp({posData}) {
     const [postes,setPostes]=useState([])
@@ -25,7 +26,7 @@ function HomeComp({posData}) {
       let varPos
           if(catgoId==null){
             setLoader(true)
-            varPos={ "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true}}
+            varPos={ "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
             let postData= await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
             handleLoad(postData)
             setLoader(false) 
@@ -45,7 +46,7 @@ function HomeComp({posData}) {
       if(offset!=0){
       let varPos
       if(catgoId==null){
-        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true}}
+        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
         handleLoad(PostData) 
         setLoader(false)
@@ -59,7 +60,7 @@ function HomeComp({posData}) {
     }
     
     const categoryData = async ()=>{
-      let variable_category={"limit": 50, "offset":0,"hierarchylevel":0,}
+      let variable_category={"limit": 10, "offset":0,"categoryGroupId":1}
     
         
         let catgeory = await fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category)
@@ -109,17 +110,18 @@ function HomeComp({posData}) {
   
   
   <>
-        {/* <Header/> */}
+        <Header catNo={catNo} setCatNo={setCatNo} setPostes={setPostes} setOffset={setOffset}/>
         <main className="container min-h-screen mx-auto max-w-screen-xl md:lg-0 px-4" >
 
         {catLoader==true?<div className="flex flex-nowrap flex-row gap-x-2 pb-4 my-10 justify-start  relative">
 
         <NavbarSkeleton/>
         </div>:
+        
          <Navbar categories={categories} catNo={catNo} setCatNo={setCatNo}  setPostes={setPostes} setOffset={setOffset} searchParams={searchParams}  scrollX={scrollX} setscrollX={setscrollX} catgoId={catgoId}/>}
           {/* nav */}
   
-          <Post postes={postes} loader={loader} catNo={catNo} scrollX={scrollX}/>
+          <Post postes={postes} loader={loader} catNo={catNo} setCatNo={setCatNo} setPostes={setPostes} setOffset={setOffset} scrollX={scrollX} />
           {/* post */}
   
   

@@ -52,16 +52,29 @@ export const GET_POSTS_QUERY_ALL_LIST = `query($channelId: Int,$categoryId: Int,
   }
   `;
   
-  export const GET_POSTS_QUERY_CATEGORY = `query($hierarchylevel: Int!){
-    categoriesList(hierarchyLevel: $hierarchylevel){
-      categories{
-        id
-        categoryName
-        categorySlug
-        parentId
+  export const GET_POSTS_QUERY_CATEGORY = `query categoryList($limit: Int
+    $offset: Int $categoryGroupId: Int $categoryGroupSlug: String
+    $hierarchyLevel: Int $checkEntriesPresence: Int ){
+      categoriesList(limit:$limit,offset:$offset,
+        categoryGroupId:$categoryGroupId,
+        categoryGroupSlug:$categoryGroupSlug, 
+        hierarchyLevel:$hierarchyLevel,
+        checkEntriesPresence:$checkEntriesPresence){
+        categories{
+          id
+          categoryName
+          categorySlug
+          description
+          imagePath
+          createdOn
+          createdBy
+          modifiedOn
+          modifiedBy
+          parentId
+        }
+        count
       }
     }
-  }
   `;
   
   

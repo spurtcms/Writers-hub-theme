@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
             showAtBottom={false}
           />
       <DarkThemeProvider>
-        <Header/>
+        
       {children}
       </DarkThemeProvider>
       </main> 
