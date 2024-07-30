@@ -5,10 +5,10 @@ import React, { useEffect } from 'react'
 import PostSkeleton from '../utilities/skeleton/PostSkeleton'
 import { fetchGraphQLDa } from '../api/graphicql'
 import { GET_COUNT } from '../api/query'
+import { imgaeUrl } from '../utilities/ImagePath'
 
 function Post({postes,loader,catNo,scrollX}) {
 
- 
 const imageLoader = ({src}) => {
   return src
 }
@@ -17,7 +17,6 @@ const countData = async (id) =>{
   let varSingle = {"entryId" :id}
   let postCount = await fetchGraphQLDa(GET_COUNT,varSingle)
 }
-
 useEffect(()=>{
   countData()
 },[])
@@ -26,12 +25,16 @@ useEffect(()=>{
   return (
    <>
    {loader==true?<>
-   <PostSkeleton/></>:<>
-   {postes?.map((data,index)=>(
+   <PostSkeleton/></>:
+        
+         <>
+         {postes?.length>0?
+         <>
+          {postes?.map((data,index)=>(
          <>
          {data?.coverImage==""||data?.coverImage==null||data?.coverImage==undefined&&<>
         <div>
-        
+       
           <div className="flex justify-start flex-wrap items-center gap-x-4">
             <p className="text-base text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>           
             <p className="text-base text-tag-color text-current">{data?.readingTime} min read</p>
@@ -43,8 +46,8 @@ useEffect(()=>{
           <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" >
             <h1 className="sm:text-5xxl text-4xl text-dark font-medium">{data?.title}</h1>              
           </Link>
-          <p className="text-base font-light text-current" dangerouslySetInnerHTML={{
-            __html: data?.description.replace("display:flex","display:block")
+          <p className="text-base font-light text-current desc" dangerouslySetInnerHTML={{
+            __html: data?.description.replaceAll("<br>"," ")
           }}></p>
           
         </div>
@@ -65,27 +68,49 @@ useEffect(()=>{
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={()=>countData(data?.id)}>
               <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>              
             </Link>
-            <p className="text-base text-current font-light line-clamp-5 " dangerouslySetInnerHTML={{
-            __html: data?.description.replace("display:flex","display:block")
-          }}></p>
+            <div className="text-base text-current font-light line-clamp-5 desc" dangerouslySetInnerHTML={{
+            __html: data?.description.replaceAll("<br>"," ")
+          }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} >
               <Image
               loader={imageLoader}
-                src={data?.coverImage}
+                src={`${imgaeUrl}${data?.coverImage}`}
                 alt="spurtCMS card image"
                 // className="dark:invert"
                 width={1000}
                 height={1000}
                 priority
+                className='h-image'
               />
             </Link>
           </div>
         </div>
 
         <div className="border-b border-color block my-8"></div>
-        </>))}</>}
+        </>))}
+        </>
+        :
+            <>
+            <div className=" px-5 lg:px-20  py-32 col-span-full grid place-items-center">
+                <div className="flex flex-col items-center max-w-[408px] ">
+                    {/* <img src="\img\noData.svg" alt="nodata" className="dark:hidden" /> */}
+                    <img
+                        src="/img/nodatafilter.svg"
+                        alt="nodata"
+                    />
+                    <h1 className=" text-2xl leading-6 font-medium text-black  mb-3 mt-6 text-center dark:dark:text-light-1">
+                        {/* {search ? "No matching search results" : "No Listing Yet !"} */}
+                        No Listing Yet !
+                    </h1>
+                    <Link href='/' className='h-[2.5rem] grid place-items-center bg-black text-base text-white px-4 mt-4 rounded-md dark:bg-white dark:text-black'>Go to Home Page</Link>
+                </div>
+            </div>
+            </>
+        }
+        </>
+        }
    </>
   )
 }

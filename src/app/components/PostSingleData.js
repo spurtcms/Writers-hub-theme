@@ -7,6 +7,7 @@ import { GET_POSTS_QUERY_SINGLE } from "@/app/api/query";
 import DetailPageSkeleton from "@/app/utilities/skeleton/DetailPageSkeleton";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { imgaeUrl } from "../utilities/ImagePath";
 
 function PostSingleData({postSingle,params}) {
 
@@ -66,15 +67,16 @@ function PostSingleData({postSingle,params}) {
           <div className="block my-5">
               <Image
                 loader={imageLoader}
-                src={postesSingle?.channelEntryDetail?.coverImage}
+                src={`${imgaeUrl}${postesSingle?.channelEntryDetail?.coverImage}`}
                 alt="spurtCMS card image"
                 width={10000}
                 height={10000}
                 priority
+                className="he-image"
               />
           </div>  
-          <p className="text-base font-normal text-grey" dangerouslySetInnerHTML={{
-            __html:postesSingle?.channelEntryDetail?.description.replace("display:flex","display:block")
+          <p className="text-base font-normal text-grey desc" dangerouslySetInnerHTML={{
+            __html:postesSingle?.channelEntryDetail?.description.replaceAll("<br>"," ")
           }}></p>
         
         </div>

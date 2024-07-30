@@ -47,7 +47,6 @@ function HomeComp({posData}) {
       if(catgoId==null){
         varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true}}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
-        console.log(PostData,"PostData")
         handleLoad(PostData) 
         setLoader(false)
       }else{
@@ -105,7 +104,6 @@ function HomeComp({posData}) {
     useEffect(() => {
       window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
-  
   
     return (
   

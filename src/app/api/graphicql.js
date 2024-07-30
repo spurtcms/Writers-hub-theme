@@ -13,7 +13,8 @@ export async function fetchGraphQLDa (GET_POSTS_QUERY_LIST,varPos) {
       body: JSON.stringify({
         query: GET_POSTS_QUERY_LIST,
         variables: varPos
-      })
+      }),
+      cache: 'no-cache'
     });
     // console.log(entries.data,"juuuu")
    return entries?.data
