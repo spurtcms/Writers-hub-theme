@@ -4,11 +4,11 @@ import { apiinstance } from "./interceptor";
 
 
 
-export async function fetchGraphQLDa (GET_POSTS_QUERY_LIST,varPos) {
+export async function fetchGraphQLDa(GET_POSTS_QUERY_LIST, varPos) {
 
   try {
-    
-    const entries = await apiinstance("",{
+
+    const entries = await apiinstance("", {
       method: 'POST',
       body: JSON.stringify({
         query: GET_POSTS_QUERY_LIST,
@@ -17,24 +17,24 @@ export async function fetchGraphQLDa (GET_POSTS_QUERY_LIST,varPos) {
       cache: 'no-cache'
     });
     // console.log(entries.data,"juuuu")
-   return entries?.data
-   
+    return entries?.data
+
   } catch (error) {
     throw error;
   }
 }
 
-export async function fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category) {
+export async function fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY, variable_category) {
 
   try {
-    const entries = await apiinstance("",{
+    const entries = await apiinstance("", {
       method: 'POST',
       body: JSON.stringify({
         query: GET_POSTS_QUERY_CATEGORY,
         variables: variable_category
       })
     });
-     return entries.data
+    return entries.data
   } catch (error) {
     throw error;
   }
