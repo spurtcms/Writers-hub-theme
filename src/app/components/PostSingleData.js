@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { fetchGraphQLDa, fetchGraphQl } from "@/app/api/graphicql";
-import { GET_POSTS_QUERY_SINGLE } from "@/app/api/query";
+import { GET_COUNT, GET_POSTS_QUERY_SINGLE } from "@/app/api/query";
 import DetailPageSkeleton from "@/app/utilities/skeleton/DetailPageSkeleton";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -30,23 +30,66 @@ function PostSingleData({postSingle,params}) {
       }
       
     }
-    
+    console.log(params,"uiyeuiewyue")
     const reload = async ()=>{
-      let varSingle={ "slug":slug }
+      let varSingle=  {"slug": slug,
+                       "AdditionalData": { "authorDetails": true,"categories": true} 
+                      }
+      // { "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
       setPostesSingle(postSingle)
       setLoader(false)
     }
-  
+
+    const countData = async (slug) =>{
+      let varSingle = {"slug": slug}
+      // {"entryId" :id}
+      console.log(varSingle,"3733hgadh")
+      let postCount = await fetchGraphQLDa(GET_COUNT,varSingle)
+      
+    }
+    useEffect(()=>{
+      countData()
+    },[])
+  console.log(countData(slug),"00090808080")
     useEffect(()=>{
       loadmore()
       reload()
     },[])
-  
+  console.log(postSingle,"gasjgsjd")
   
     const imageLoader = ({src}) => {
       return src
     }
+
+    // const imageHtml = ``
+
+
+  
+//   const parser = new DOMParser();
+// const doc = parser.parseFromString(imageHtml, 'text/html');
+// const images = doc.querySelectorAll('img');
+// console.log(images,"ghjgh")
+// images.forEach((image, index) => {
+//   if (index > 0) {
+//     image.remove();
+//   }
+// });
+
+// const parser =new DOMParser();
+// const doc = parser.parseFromString(imageHtml, 'text/html');
+// const images = doc.querySelectorAll('img');
+
+// let imgHtml = '';
+// if (images.length > 0) {
+//   const firstImage = images[1]; // Select the first image
+//   imgHtml += `<img src="${firstImage.src}" alt="${firstImage.alt}">`;
+// }
+
+// const updatedImageHtml = imgHtml;
+
+// const updatedImageHtml = doc.body.innerHTML;
+// console.log(updatedImageHtml,"8uudd")
   return (<>
   <Header catNo={catNo} setCatNo={setCatNo} setPostes={setPostes} setOffset={setOffset}/>
     {loader==true?<>
@@ -60,20 +103,22 @@ function PostSingleData({postSingle,params}) {
 
           <div className="flex justify-start flex-wrap items-center gap-x-4">
           <Link href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></Link>
-            <p className="text-base text-tag-color">{moment(postesSingle?.channelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
-            <p className="text-base text-tag-color">{postesSingle?.channelEntryDetail?.readingTime} min read</p>
-            <p className="text-base text-tag-color">views {postesSingle?.channelEntryDetail?.viewCount}</p>
-            <a className="text-base text-primary">{postesSingle?.channelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.channelEntryDetail?.authorDetails?.LastName}</a>
-           { postesSingle?.channelEntryDetail?.categories.length!=0&&postesSingle?.channelEntryDetail?.categories.map((data,ind)=>(
-            <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{postesSingle?.channelEntryDetail?.categories[ind].at(-1).categoryName}</div>))}
+            <p className="text-base text-tag-color">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
+            <p className="text-base text-tag-color">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
+            <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>
+            <a className="text-base text-primary">{postesSingle?.ChannelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.ChannelEntryDetail?.authorDetails?.LastName}</a>
+           { postesSingle?.ChannelEntryDetail?.categories.length!=0&&postesSingle?.ChannelEntryDetail?.categories.map((data,ind)=>(
+            <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{postesSingle?.ChannelEntryDetail?.categories[ind][0].categoryName}</div>))}
           </div>
           <div className="pl-8">
-          <h1 className="sm:text-4xl text-3xl text-dark font-medium my-5">{postesSingle?.channelEntryDetail?.title}</h1>              
+          <h1 className="sm:text-4xl text-3xl text-dark font-medium my-5">{postesSingle?.ChannelEntryDetail?.title}</h1>              
           
-          <div className="block my-5">
+          {/* <div className="block my-5 w-full h-auto img-full"  dangerouslySetInnerHTML={{
+            __html:updatedImageHtml}}> */}
+              <div className="block my-5">
               <Image
                 loader={imageLoader}
-                src={`${imgaeUrl}${postesSingle?.channelEntryDetail?.coverImage}`}
+                src={`${postesSingle?.ChannelEntryDetail?.coverImage==""?"/img/Default-image-layout.svg":postesSingle?.ChannelEntryDetail?.coverImage}`}
                 alt="spurtCMS card image"
                 width={10000}
                 height={10000}
@@ -82,7 +127,7 @@ function PostSingleData({postSingle,params}) {
               />
           </div>  
           <p className="text-base font-normal text-grey desc" dangerouslySetInnerHTML={{
-            __html:postesSingle?.channelEntryDetail?.description.replaceAll("<br>"," ")
+            __html:postesSingle?.ChannelEntryDetail?.description.replaceAll("<br>"," ")
           }}></p>
         
         </div>

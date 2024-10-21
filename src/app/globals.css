@@ -138,3 +138,7 @@ body {
 .nodata{
   height: calc(100vh - 11rem);
 }
+
+.img-full img{
+  width: 100%;
+}

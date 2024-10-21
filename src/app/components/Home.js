@@ -19,21 +19,30 @@ function HomeComp({posData}) {
     const [scrollX, setscrollX] = useState(0);
     const searchParams = useSearchParams()
     let catgoId=searchParams.get("catgoId")
-    
+    console.log(categories,"ssdsdsd")
 
     const postData = async ()=>{
   
       let varPos
           if(catgoId==null){
             setLoader(true)
-            varPos={ "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
+            varPos={ "commonFilter": {"limit": 10,"offset": 0,},
+                     "entryFilter": { "categorySlug": "nextjs-blog-theme",},
+                     "AdditionalData": { "authorDetails": true, "categories": true }
+                   }
+            // { "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
+            
             let postData= await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
             handleLoad(postData)
             setLoader(false) 
           }else{
             setLoader(true)
             setCatNo(catgoId)
-            varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
+            varPos={ "commonFilter": {"limit": 10,"offset": offset,},
+                     "entryFilter": { "categorySlug": catgoId,},
+                     "AdditionalData": { "authorDetails": true, "categories": true }
+                   }
+            // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
             let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
             handleLoad(postData)
             setLoader(false)
@@ -46,12 +55,20 @@ function HomeComp({posData}) {
       if(offset!=0){
       let varPos
       if(catgoId==null){
-        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
+        varPos={ "commonFilter": {"limit": 10,"offset": offset,},
+                 "entryFilter": { "categorySlug": 1,},
+                 "AdditionalData": { "authorDetails": true, "categories": true }
+               }
+        // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
         handleLoad(PostData) 
         setLoader(false)
       }else{
-        varPos={ "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
+        varPos={"commonFilter": {"limit": 10,"offset": offset,},
+                "entryFilter": { "categorySlug": catgoId,},
+                "AdditionalData": { "authorDetails": true, "categories": true }
+               }
+        // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
         handleLoad(PostData) 
         setLoader(false)
@@ -60,11 +77,13 @@ function HomeComp({posData}) {
     }
     
     const categoryData = async ()=>{
-      let variable_category={"limit": 10, "offset":0,"categoryGroupId":1}
+      let variable_category={"categoryFilter":{ "categoryGroupSlug": "nextjs-blog-theme"},"commonFilter":{"limit":10,"offset":0}}
+      // {"limit": 10, "offset":0,"categoryGroupId":1}
     
         
         let catgeory = await fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category)
-        setCategories(catgeory)
+        console.log(catgeory,"jkghjfj")
+        setCategories(catgeory?.CategoryList)
         setCatLoader(false)
     }
 
@@ -84,8 +103,8 @@ function HomeComp({posData}) {
     },[])
 
   const handleLoad=(data)=>{
-  let postesArr=postes.concat(data?.channelEntriesList?.channelEntriesList)
-  
+  let postesArr=postes.concat(data?.ChannelEntriesList?.channelEntriesList)
+  console.log(postesArr,data,"kjgshjds")
   setPostes(postesArr)
   }
 
