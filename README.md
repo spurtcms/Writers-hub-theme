@@ -121,7 +121,20 @@ sudo systemctl stop spurtcms-admin.service
 ```
 Now you can explore the features and functionalities of spurtCMS Admin for efficient content management.
 
+## Step 2. Run Next.js in development mode
+```bash
+npm install 
+```
+```bash
+npm run dev
+```
+Your blog should be up and running on [http://localhost:3000!](http://localhost:3000!)
 
+
+## Step 3. Run Next.js in production mode
+```bash
+npm run prod
+```
 
 ## Feedback and Questions
 If you have feedback or questions about this starter, please use the Github Issues on this repo, [(https://github.com/spurtcms/nextjs-starter-theme/issues)]
