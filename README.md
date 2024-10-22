@@ -35,13 +35,30 @@ Use the Deploy Button below, you'll deploy the example using
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fspurtcms%2Fnextjs-blog-theme-liart)
 
 
-
 ## Set up environment variables
 
 Open .env and set  NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_BASEURL  to  be the URL to your GraphQL endpoint in spurtCMS. For example:
  https://graphql.spurtcms.com/query
+ 
+## Steps to get API Key
+ 
+ Before starting our Next JS blog template we need to go inside our spurtCMS Admin and get the default token that we will be using for displaying our content.
 
-Your env should look like this:
+1.Inside your spurtCMS Admin Panel navigate to API Keys.
+
+![API Key 1 (1)](https://github.com/user-attachments/assets/b3806e8f-1dcd-4f75-88fe-8366b3036d47)
+
+
+
+2.click on the Action key
+![API Key 2 (1)](https://github.com/user-attachments/assets/7976ebe4-40f9-4c65-b99b-195e73ca2f9a)
+
+3.Copy the api key
+![API Key 3](https://github.com/user-attachments/assets/a3d34ac1-7243-4931-8a09-6c40c2d005b4)
+
+
+
+Once you have your token add it to your env and it should look like this:
 
 
 
@@ -50,8 +67,10 @@ NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_BASEURL=""
 ```
 
 ```bash
-NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_TOKEN=""
+NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_TOKEN="your-api-token"
 ```
+
+
 
 ## Set up on your own - graphql sever with admin panel
 
@@ -65,19 +84,18 @@ environments.
 ## Screenshots of spurtCMSAdmin
 Dashboard
 
-![Screenshot of spurtCMS dashboars](https://spurtcms.com/github-banner/dashboard.png)
+![Dashboard](https://dev.spurtcms.com/public/img/default-channel-banner1.svg)
+
 
 Channels
 
-![Screenshot of spurtCMS channels](https://spurtcms.com/github-banner/channelentries.png)
+![Screenshot of spurtCMS channels](	https://dev.spurtcms.com/public/img/create-category-banner.svg)
 
-Spaces
+Entries
 
-![Screenshot of spurtCMS spaces](https://spurtcms.com/github-banner/space.png)
+![Screenshot of spurtCMS spaces](	https://dev.spurtcms.com/public/img/entries-banner.svg)
 
-Blog
 
-![Screenshot of spurtCMS blog](https://spurtcms.com/github-banner/content.png)
 
 
 
@@ -101,29 +119,11 @@ sudo systemctl start spurtcms-admin.service
 ```bash
 sudo systemctl stop spurtcms-admin.service
 ```
-## Step 2. GraphqlAPI Setup
-To initiate the set up process please refer
-[(https://www.spurtcms.com/documentation/grapql-api-setup)]
-
-or using CLI
-```bash
-spurtcms -i graphql
-```
-
-```bash
-sudo ./spurtcms-api.sh
-```
-
-```bash
-sudo systemctl start spurtcms-api.service
-```
-
-```bash
-sudo systemctl stop spurtcms-api.service
-```
+Now you can explore the features and functionalities of spurtCMS Admin for efficient content management.
 
 
 
 ## Feedback and Questions
 If you have feedback or questions about this starter, please use the Github Issues on this repo, [(https://github.com/spurtcms/nextjs-starter-theme/issues)]
 or Send Email to us [(support@spurtcms.com)]
+
