@@ -28,6 +28,22 @@ const handleHomePage=()=>{
       setOffset(0)
 }
 
+const handleDescription=(data)=>{
+  let imageHtml = data
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(imageHtml, 'text/html');
+  
+  // Select all <img> tags in the document
+  const images = doc.querySelectorAll('img');
+  
+  images.forEach((image) => {
+    image.remove(); // Remove each image from the document
+  });
+  
+  // Serialize the modified DOM back to an HTML string
+  return doc.body.innerHTML;
+}
 
 // for(let i=0;i<postes.length;i++){
 //   for(let j=1;j<postes.length;j++){
@@ -39,7 +55,9 @@ const handleHomePage=()=>{
 // }
 
 // const postesFilter = [...new Set(postes.map(JSON.stringify))].map(JSON.parse);
-// console.log(postesFilter,'postesww');
+
+const imageHtml=
+console.log(postes,'postesww');
   return (
    <>
    {loader==true?<>
@@ -67,8 +85,8 @@ const handleHomePage=()=>{
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={()=>countData(data?.id)}>
               <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>              
             </Link>
-            <div className="text-base text-current font-light line-clamp-5 desc" dangerouslySetInnerHTML={{
-            __html: data?.description.replaceAll("<br>"," ")
+            <div className="text-base text-current font-light line-clamp-4 desc" dangerouslySetInnerHTML={{
+            __html: handleDescription( data?.description?.replaceAll("<br>"," "))
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>
@@ -104,8 +122,8 @@ const handleHomePage=()=>{
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={()=>countData(data?.id)}>
               <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>              
             </Link>
-            <div className="text-base text-current font-light line-clamp-5 desc" dangerouslySetInnerHTML={{
-            __html: data?.description.replaceAll("<br>"," ")
+            <div className="text-base text-current font-light line-clamp-4 desc" dangerouslySetInnerHTML={{
+            __html:handleDescription( data?.description?.replaceAll("<br>"," "))
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>

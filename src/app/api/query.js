@@ -15,6 +15,9 @@ export const GET_POSTS_QUERY_ALL_LIST = `query ChannelEntriesList(
         status
         isActive
         createdOn
+        createdBy
+        modifiedBy
+        modifiedOn
         coverImage
         categoriesId
         featuredEntry
@@ -151,6 +154,9 @@ export const GET_POSTS_QUERY_ALL_LIST = `query ChannelEntriesList(
       status
       isActive
       createdOn
+      createdBy
+      modifiedBy
+      modifiedOn
       coverImage
       metaTitle
       metaDescription

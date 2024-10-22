@@ -33,10 +33,11 @@ function PostSingleData({postSingle,params}) {
     console.log(params,"uiyeuiewyue")
     const reload = async ()=>{
       let varSingle=  {"slug": slug,
-                       "AdditionalData": { "authorDetails": true,"categories": true} 
+                       "AdditionalData": { "authorDetails": false,"categories": true} 
                       }
       // { "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
+      console.log(postSingle,"ngfdkjkgd")
       setPostesSingle(postSingle)
       setLoader(false)
     }
@@ -61,11 +62,21 @@ function PostSingleData({postSingle,params}) {
     const imageLoader = ({src}) => {
       return src
     }
+//     let imageHtml
 
-    // const imageHtml = ``
+//    const parser = new DOMParser();
+// const doc = parser.parseFromString(imageHtml, 'text/html');
 
+// // Select all <img> tags in the document
+// const images = doc.querySelectorAll('img');
 
-  
+// images.forEach((image) => {
+//   image.remove(); // Remove each image from the document
+// });
+
+// // Serialize the modified DOM back to an HTML string
+// const modifiedHtml = doc.body.innerHTML;
+  // console.log(modifiedHtml,"dsgydsd")
 //   const parser = new DOMParser();
 // const doc = parser.parseFromString(imageHtml, 'text/html');
 // const images = doc.querySelectorAll('img');
@@ -115,7 +126,7 @@ function PostSingleData({postSingle,params}) {
           
           {/* <div className="block my-5 w-full h-auto img-full"  dangerouslySetInnerHTML={{
             __html:updatedImageHtml}}> */}
-              <div className="block my-5">
+              {/* <div className="block my-5">
               <Image
                 loader={imageLoader}
                 src={`${postesSingle?.ChannelEntryDetail?.coverImage==""?"/img/Default-image-layout.svg":postesSingle?.ChannelEntryDetail?.coverImage}`}
@@ -125,7 +136,7 @@ function PostSingleData({postSingle,params}) {
                 priority
                 className="he-image"
               />
-          </div>  
+          </div>   */}
           <p className="text-base font-normal text-grey desc" dangerouslySetInnerHTML={{
             __html:postesSingle?.ChannelEntryDetail?.description.replaceAll("<br>"," ")
           }}></p>
