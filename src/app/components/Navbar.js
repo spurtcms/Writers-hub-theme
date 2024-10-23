@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 function Navbar({categories,catNo,setCatNo,setPostes,setOffset,scrollX,setscrollX,catgoId}) {
 
 
-  console.log(categories,'categories');
+  console.log(catgoId,'categories');
     const router=useRouter()
     const searchParams = useSearchParams()
     let scrl = useRef(null);
@@ -66,9 +66,10 @@ useEffect(()=>{
 
     const handleCatList=(id)=>{
       setCatNo(id)
-      setPostes([])
+      // setPostes([])
       setOffset(0)
-      catgoId=id?.toString()
+      // catgoId=id?.toString()
+      console.log(catgoId,"0uyh")
       if(id==null){
       router.push(`/`)
     }else{
@@ -96,9 +97,9 @@ useEffect(()=>{
         {categories?.categorylist&&<>
         <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style'>
             <li onClick={()=>handleCatList(null)} style={{pointerEvents:catNo==null?"none":""}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId==null?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> All</li>
-          {categories?.categorylist?.map((data,index)=>(
+          {categories?.categorylist?.map((data,index)=>(<>{console.log(catgoId,data.categorySlug,"iusdjf")}
                 <li key={index} onClick={()=>handleCatList(data.categorySlug)} style={{pointerEvents:data.categorySlug==catNo?"none":""}} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId==data.categorySlug?'border-cyan-500 text-primary':'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
-          
+                </>
    ))}
   </ul>
   </>

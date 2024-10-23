@@ -52,7 +52,8 @@ function HomeComp({posData}) {
             // { "limit": 10, "offset": offset ,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
             
             let postData= await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
-            handleLoad(postData)
+            // handleLoad(postData)
+            setPostes(postData?.ChannelEntriesList?.channelEntriesList)
             setLoader(false) 
           }else{
             setLoader(true)
@@ -63,7 +64,8 @@ function HomeComp({posData}) {
                    }
             // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
             let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
-            handleLoad(postData)
+            // handleLoad(postData)
+            setPostes(postData?.ChannelEntriesList?.channelEntriesList)
             setLoader(false)
     
           }
@@ -80,6 +82,8 @@ function HomeComp({posData}) {
                }
         // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
+        // handleLoad(PostData) 
+        // setPostes(PostData?.ChannelEntriesList?.channelEntriesList)
         handleLoad(PostData) 
         setLoader(false)
       }else{
