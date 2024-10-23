@@ -84,19 +84,20 @@ environments.
 ## Screenshots of spurtCMSAdmin
 Dashboard
 
-![Dashboard](https://dev.spurtcms.com/public/img/default-channel-banner1.svg)
+![Dashboard](https://dev.spurtcms.com/public/img/dashboardpage.png)
 
 
 Channels
 
-![Screenshot of spurtCMS channels](	https://dev.spurtcms.com/public/img/create-category-banner.svg)
+![Screenshot of spurtCMS channels](	https://dev.spurtcms.com/public/img/channellistpage.png)
 
 Entries
 
-![Screenshot of spurtCMS spaces](	https://dev.spurtcms.com/public/img/entries-banner.svg)
+![Screenshot of spurtCMS entries](	https://dev.spurtcms.com/public/img/entrieslistpage.png)
 
 
-
+Category Group
+![Screenshot of spurtCMS categories group](	https://dev.spurtcms.com/public/img/categorygrouppage.png)
 
 
 First,you need to set up spurtCMS Admin Application.There are many solutions for insallation.
