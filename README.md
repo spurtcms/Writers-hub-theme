@@ -84,7 +84,7 @@ environments.
 ## Screenshots of spurtCMSAdmin
 Dashboard
 
-![Dashboard](https://dev.spurtcms.com/public/img/dashboardpage.png)
+![Dashboard](https://dev.spurtcms.com/public/img/dashboard.jpg)
 
 
 Channels
