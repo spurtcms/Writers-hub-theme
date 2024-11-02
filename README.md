@@ -37,8 +37,7 @@ Use the Deploy Button below, you'll deploy the example using
 
 ## Set up environment variables
 
-Open .env and set  NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_BASEURL  to  be the URL to your GraphQL endpoint in spurtCMS. For example:
- https://graphql.spurtcms.com/query
+Open .env and set  NEXT_PUBLIC_SPURTCMS_NEXTJS_STARTER_THEME_BASEURL  to  be the URL to your GraphQL endpoint in spurtCMS. 
  
 ## Steps to get API Key
  
