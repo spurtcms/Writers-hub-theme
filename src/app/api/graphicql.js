@@ -34,7 +34,8 @@ export async function fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY, variable_c
         variables: variable_category
       })
     });
-    return entries.data
+    console.log(entries?.data,"dataaaaaa")
+    return entries?.data
   } catch (error) {
     throw error;
   }

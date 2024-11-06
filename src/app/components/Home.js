@@ -127,7 +127,7 @@ function HomeComp({posData}) {
 
   const handleLoad=(data)=>{
     console.log(data,"kjgjhfgds")
-  let postesArr=postes.concat(data?.ChannelEntriesList?.channelEntriesList)
+  let postesArr=postes?.concat(data?.ChannelEntriesList?.channelEntriesList)
   console.log(postesArr,data,"kjgshjds")
   setPostes(postesArr)
   }
