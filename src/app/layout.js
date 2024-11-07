@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
       </head>
       <body>
+      {/* <script src="https://cdn.tailwindcss.com"></script> */}
       <main className="xl:py-6 sm:py-4 xl:px-0 px-6 py-6">
       <NextTopLoader
             color="#00AEEF"
