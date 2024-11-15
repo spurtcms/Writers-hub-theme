@@ -113,7 +113,7 @@ body {
   height: 608px !important;
 }
 
-.desc p,.desc h2,.desc h3,.desc h5,.desc h6,.desc span{
+/* .desc p,.desc h2,.desc h3,.desc h5,.desc h6,.desc span{
   color: #212529 !important;
   font-weight: 300 !important;
   font-size: 1.125rem !important;
@@ -121,7 +121,7 @@ body {
   background-color: transparent !important;
   font-family: Roboto, sans-serif !important;
   margin: 0 !important;
-}
+} */
 .desc h1{
   font-size: 1.75rem !important;
 }
@@ -130,14 +130,14 @@ b, strong{
   font-weight: bold;
 }
 
-.dark .desc p,.dark .desc h1,.dark .desc h2,.dark .desc h3,.dark .desc h5,.dark .desc h6,.dark .desc span{
+/* .dark .desc p,.dark .desc h1,.dark .desc h2,.dark .desc h3,.dark .desc h5,.dark .desc h6,.dark .desc span{
   color: rgb(156 163 175) !important;
   background-color: #121212!important;
 }
 .dark .bg-black{
   background-color: white !important;
   color: black !important;
-}
+} */
 .dark\:bg-gray-800:is(.dark *){
   border-color: rgba(31, 41, 55, 1) !important;
   background-color: rgba(31, 41, 55, 1) !important;

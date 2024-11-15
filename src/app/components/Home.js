@@ -26,10 +26,22 @@ function HomeComp({posData}) {
       let varPos
           if(catgoId==null){
             setLoader(true)
-            varPos= { "commonFilter": {"limit": 10,"offset": 0},
-            "entryFilter": { "categorySlug": "blog",},
-            "AdditionalData": { "authorDetails": false, "categories": true }
-          }
+            varPos= {
+              "commonFilter": {
+                "limit": 10,
+                "offset": 0,
+                "keyword":""
+              },
+              "entryFilter": {
+                "Status": "Publish",
+                "categorySlug": "blog",
+              },
+              "AdditionalData": {
+              "authorDetails": false,
+                "categories": true
+              }
+            }
+            
             // {
             //   "commonFilter": {
             //     "limit": 10,
@@ -58,10 +70,22 @@ function HomeComp({posData}) {
           }else{
             setLoader(true)
             setCatNo(catgoId)
-            varPos={ "commonFilter": {"limit": 10,"offset": offset,},
-                     "entryFilter": { "categorySlug": catgoId,},
-                     "AdditionalData": { "authorDetails": false, "categories": true }
-                   }
+            varPos={
+              "commonFilter": {
+                "limit": 10,
+                "offset": 0,
+                "keyword":""
+              },
+              "entryFilter": {
+                "Status": "Publish",
+                "categorySlug": "blog",
+              },
+              "AdditionalData": {
+              "authorDetails": false,
+                "categories": true
+              }
+            }
+            
             // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
             let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
             // handleLoad(postData)
@@ -76,10 +100,22 @@ function HomeComp({posData}) {
       if(offset!=0){
       let varPos
       if(catgoId==null){
-        varPos={ "commonFilter": {"limit": 10,"offset": offset,},
-                 "entryFilter": { "categorySlug": "blog",},
-                 "AdditionalData": { "authorDetails": false, "categories": true }
-               }
+        varPos={
+          "commonFilter": {
+            "limit": 10,
+            "offset": 0,
+            "keyword":""
+          },
+          "entryFilter": {
+            "Status": "Publish",
+            "categorySlug": "blog",
+          },
+          "AdditionalData": {
+          "authorDetails": false,
+            "categories": true
+          }
+        }
+        
         // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":1}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
         // handleLoad(PostData) 
@@ -87,10 +123,22 @@ function HomeComp({posData}) {
         handleLoad(PostData) 
         setLoader(false)
       }else{
-        varPos={"commonFilter": {"limit": 10,"offset": offset,},
-                "entryFilter": { "categorySlug": catgoId,},
-                "AdditionalData": { "authorDetails": false, "categories": true }
-               }
+        varPos={
+          "commonFilter": {
+            "limit": 10,
+            "offset": 0,
+            "keyword":""
+          },
+          "entryFilter": {
+            "Status": "Publish",
+            "categorySlug": "blog",
+          },
+          "AdditionalData": {
+          "authorDetails": false,
+            "categories": true
+          }
+        }
+        
         // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
         handleLoad(PostData) 
@@ -148,6 +196,7 @@ function HomeComp({posData}) {
     useEffect(() => {
       window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
+    
   
     return (
   

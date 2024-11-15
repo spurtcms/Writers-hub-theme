@@ -32,9 +32,28 @@ function PostSingleData({postSingle,params}) {
     }
     console.log(params,"uiyeuiewyue")
     const reload = async ()=>{
-      let varSingle=  {"slug": slug,
-                       "AdditionalData": { "authorDetails": false,"categories": true} 
-                      }
+      let varSingle=  {
+ 
+        "slug": slug,
+        "AdditionalData": {
+          "authorDetails": true,
+          "memberProfile": false,
+          "additionalFields": true,
+          "categories": true
+        },
+        
+        
+      }
+
+
+
+
+
+
+
+
+
+                      
       // { "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
       console.log(postSingle,"ngfdkjkgd")
@@ -101,6 +120,29 @@ function PostSingleData({postSingle,params}) {
 
 // const updatedImageHtml = doc.body.innerHTML;
 // console.log(updatedImageHtml,"8uudd")
+
+
+const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+
+    useEffect(() => {
+      if (isScriptLoaded) return;
+      const script = document.createElement('script');
+      script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries';
+      script.defer = true;
+      script.async = true;
+  
+      script.onload = () => setIsScriptLoaded(true); 
+      document.body.appendChild(script);
+  
+      return () => {
+        document.body.removeChild(script);
+      };
+    }, [isScriptLoaded]);
+
+
+
+
+
   return (<>
   <Header catNo={catNo} setCatNo={setCatNo} setPostes={setPostes} setOffset={setOffset}/>
     {loader==true?<>

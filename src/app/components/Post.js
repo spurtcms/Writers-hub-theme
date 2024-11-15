@@ -67,7 +67,7 @@ console.log(postes,'postesww');
          {postes?.length>0?
          <>
           {postes?.map((data,index)=>(
-         <>
+         <>{console.log(data,"datakokoko")}
          {((data?.coverImage==""))&&<>
        
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
