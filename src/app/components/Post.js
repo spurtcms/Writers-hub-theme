@@ -79,14 +79,16 @@ console.log(postes,'postesww');
               <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
               {data?.categories.map((catdata,ind)=>(<>
               {console.log(data.categories[ind][0].categoryName,"kufeyjdss")}
+           
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
               </>))}
             </div>
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={()=>countData(data?.id)}>
               <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>              
             </Link>
+
             <div className="text-base text-current font-light line-clamp-4 desc" dangerouslySetInnerHTML={{
-            __html: handleDescription( data?.description?.replaceAll("<br>"," "))
+            __html: handleDescription( data?.description?.replaceAll("<br>"," ").replace(/<h1[^>]*>|<\/h1>/gi, "").replace(/p-\[24px_60px_10px\]/g, ""))
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>
@@ -123,7 +125,7 @@ console.log(postes,'postesww');
               <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>              
             </Link>
             <div className="text-base text-current font-light line-clamp-4 desc" dangerouslySetInnerHTML={{
-            __html:handleDescription( data?.description?.replaceAll("<br>"," "))
+            __html:handleDescription( data?.description?.replaceAll("<br>"," ").replace(/<h1[^>]*>|<\/h1>/gi, "").replace(/p-\[24px_60px_10px\]/g, ""))
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>

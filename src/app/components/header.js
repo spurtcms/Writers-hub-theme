@@ -26,7 +26,7 @@ export default function Header({catNo,setCatNo,setPostes,setOffset}) {
     </div> */}
     {/* <nav className="flex items-center justify-between  py-6 sm:px-20 px-6 sm:px-10 max-w-screen-2xl m-auto "> */}
 <div className="container mx-auto max-w-screen-xl flex justify-between">
-          <a href='/'  onClick={()=>handleClick()} className="inline-block">
+          <Link href='/'  onClick={()=>handleClick()} className="inline-block">
             
             <Image
               src="/img/logo.svg"
@@ -35,7 +35,7 @@ export default function Header({catNo,setCatNo,setPostes,setOffset}) {
               width={32}
               height={32}
               priority
-            /></a>
+            /></Link>
 <ul className="list-none flex gap-4 items-center">
                         
                         <li>

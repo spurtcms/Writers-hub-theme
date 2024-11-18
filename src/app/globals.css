@@ -124,6 +124,7 @@ body {
 } */
 .desc h1{
   font-size: 1.75rem !important;
+  text-decoration: underline;
 }
 
 b, strong{

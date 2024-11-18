@@ -155,7 +155,7 @@ const [isScriptLoaded, setIsScriptLoaded] = useState(false);
           
 
           <div className="flex justify-start flex-wrap items-center gap-x-4">
-          <a href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></a>
+          <Link href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></Link>
             <p className="text-base text-tag-color">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
             <p className="text-base text-tag-color">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
             <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>
@@ -180,7 +180,7 @@ const [isScriptLoaded, setIsScriptLoaded] = useState(false);
               />
           </div>   */}
           <p className="text-base font-normal text-grey desc" dangerouslySetInnerHTML={{
-            __html:postesSingle?.ChannelEntryDetail?.description.replaceAll("<br>"," ")
+            __html:postesSingle?.ChannelEntryDetail?.description.replaceAll("<br>"," ").replace(/<h1[^>]*>|<\/h1>/gi, "").replace(/p-\[24px_60px_10px\]/g, "")
           }}></p>
         
         </div>
