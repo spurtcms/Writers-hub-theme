@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 import { GET_POSTS_QUERY_ALL_LIST, GET_POSTS_QUERY_CATEGORY } from "../api/query";
 import Navbar from "./Navbar";
@@ -17,7 +17,9 @@ function HomeComp({posData}) {
     const [catLoader,setCatLoader]=useState(true)
     const [offset,setOffset]=useState(0)
     const [scrollX, setscrollX] = useState(0);
+    const router = useRouter()
     const searchParams = useSearchParams()
+    const popstate = usePathname()
     let catgoId=searchParams.get("catgoId")
     console.log(categories,"ssdsdsd")
 
@@ -197,6 +199,22 @@ function HomeComp({posData}) {
       window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
     
+
+    useEffect(()=>{
+      console.log(searchParams, popstate, "pathnamevalue")
+      window.addEventListener('popstate', (e) =>{
+        if(e){
+          if(popstate === '/'){
+            window.location.reload()
+          }
+        }
+      })
+      // console.log(e,"user clicked back button")
+    },[popstate])
+
+
+
+
   
     return (
   
