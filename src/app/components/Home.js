@@ -21,7 +21,7 @@ function HomeComp({posData}) {
     const searchParams = useSearchParams()
     const popstate = usePathname()
     let catgoId=searchParams.get("catgoId")
-    console.log(categories,"ssdsdsd")
+
 
     const postData = async ()=>{
   
@@ -75,12 +75,12 @@ function HomeComp({posData}) {
             varPos={
               "commonFilter": {
                 "limit": 10,
-                "offset": 0,
+                "offset": offset,
                 "keyword":""
               },
               "entryFilter": {
                 "Status": "Publish",
-                "categorySlug": "blog",
+                "categorySlug": catgoId,
               },
               "AdditionalData": {
               "authorDetails": false,
@@ -90,7 +90,10 @@ function HomeComp({posData}) {
             
             // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
             let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
+  
+            
             // handleLoad(postData)
+
             setPostes(postData?.ChannelEntriesList?.channelEntriesList)
             setLoader(false)
     
@@ -105,7 +108,7 @@ function HomeComp({posData}) {
         varPos={
           "commonFilter": {
             "limit": 10,
-            "offset": 0,
+            "offset": offset,
             "keyword":""
           },
           "entryFilter": {
@@ -128,12 +131,12 @@ function HomeComp({posData}) {
         varPos={
           "commonFilter": {
             "limit": 10,
-            "offset": 0,
+            "offset": offset,
             "keyword":""
           },
           "entryFilter": {
             "Status": "Publish",
-            "categorySlug": "blog",
+            "categorySlug": catgoId,
           },
           "AdditionalData": {
           "authorDetails": false,
@@ -155,7 +158,7 @@ function HomeComp({posData}) {
     
         
         let catgeory = await fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY,variable_category)
-        console.log(catgeory,"jkghjfj")
+
         setCategories(catgeory?.CategoryList)
         setCatLoader(false)
     }
@@ -176,9 +179,9 @@ function HomeComp({posData}) {
     },[])
 
   const handleLoad=(data)=>{
-    console.log(data,"kjgjhfgds")
+  
   let postesArr=postes?.concat(data?.ChannelEntriesList?.channelEntriesList)
-  console.log(postesArr,data,"kjgshjds")
+
   setPostes(postesArr)
   }
 
@@ -201,7 +204,7 @@ function HomeComp({posData}) {
     
 
     useEffect(()=>{
-      console.log(searchParams, popstate, "pathnamevalue")
+   
       window.addEventListener('popstate', (e) =>{
         if(e){
           if(popstate === '/'){
@@ -209,7 +212,7 @@ function HomeComp({posData}) {
           }
         }
       })
-      // console.log(e,"user clicked back button")
+   
     },[popstate])
 
 

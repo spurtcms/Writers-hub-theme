@@ -16,7 +16,7 @@ export async function fetchGraphQLDa(GET_POSTS_QUERY_LIST, varPos) {
       }),
       cache: 'no-cache'
     });
-    // console.log(entries.data,"juuuu")
+
     return entries?.data
 
   } catch (error) {
@@ -34,7 +34,7 @@ export async function fetchGraphQLCatgoData(GET_POSTS_QUERY_CATEGORY, variable_c
         variables: variable_category
       })
     });
-    console.log(entries?.data,"dataaaaaa")
+ 
     return entries?.data
   } catch (error) {
     throw error;

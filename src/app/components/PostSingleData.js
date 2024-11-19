@@ -30,33 +30,36 @@ function PostSingleData({postSingle,params}) {
       }
       
     }
-    console.log(params,"uiyeuiewyue")
+
     const reload = async ()=>{
-      let varSingle=  {
+      let varSingle=  
+      // {
  
+      //   "slug": slug,
+      //   "AdditionalData": {
+      //     "authorDetails": true,
+      //     "memberProfile": false,
+      //     "additionalFields": true,
+      //     "categories": true
+      //   },
+        
+        
+      // }
+      {
         "slug": slug,
         "AdditionalData": {
           "authorDetails": true,
           "memberProfile": false,
           "additionalFields": true,
           "categories": true
-        },
-        
-        
+        }
       }
-
-
-
-
-
-
-
 
 
                       
       // { "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
-      console.log(postSingle,"ngfdkjkgd")
+      console.log(postesSingle,"postesSingleeeeeee")
       setPostesSingle(postSingle)
       setLoader(false)
     }
@@ -64,14 +67,14 @@ function PostSingleData({postSingle,params}) {
     const countData = async (slug) =>{
       let varSingle = {"slug": slug}
       // {"entryId" :id}
-      console.log(varSingle,"3733hgadh")
+
       let postCount = await fetchGraphQLDa(GET_COUNT,varSingle)
       
     }
     useEffect(()=>{
       countData()
     },[])
-  console.log(countData(slug),"00090808080")
+    
     useEffect(()=>{
       loadmore()
       reload()

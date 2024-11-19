@@ -32,7 +32,8 @@ export const GET_POSTS_QUERY_ALL_LIST = `query ChannelEntriesList(
           email
           mobileNo
         }
-      }
+      },
+      count
     }  
   }`
 
@@ -193,7 +194,7 @@ $AdditionalData: EntriesAdditionalData
           id
           sectionName
           sectionTypeId
-          createdOn
+          
           createdBy
           modifiedOn
           modifiedBY
@@ -206,7 +207,6 @@ $AdditionalData: EntriesAdditionalData
           fieldTypeId
           mandatoryField
           optionExist
-          createdOn
           createdBy
           modifiedOn
           modifiedBY
@@ -221,7 +221,6 @@ $AdditionalData: EntriesAdditionalData
           fieldValue{
             id
             fieldValue
-            createdOn
             createdBy
             modifiedOn
             modifiedBY
@@ -231,8 +230,6 @@ $AdditionalData: EntriesAdditionalData
             id
             optionName
             optionValue
-            createdOn
-            createdOn
             createdBy
             modifiedOn
             modifiedBY
@@ -287,9 +284,7 @@ $AdditionalData: EntriesAdditionalData
       length
     }
   }
-}
-
-`
+}`;
   
   
   // `query($slug: String!){

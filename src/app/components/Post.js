@@ -56,8 +56,8 @@ const handleDescription=(data)=>{
 
 // const postesFilter = [...new Set(postes.map(JSON.stringify))].map(JSON.parse);
 
-const imageHtml=
-console.log(postes,'postesww');
+console.log(postes,"postesss")
+
   return (
    <>
    {loader==true?<>
@@ -67,7 +67,7 @@ console.log(postes,'postesww');
          {postes?.length>0?
          <>
           {postes?.map((data,index)=>(
-         <>{console.log(data,"datakokoko")}
+         <>{console.log(data,"data")}
          {((data?.coverImage==""))&&<>
        
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
@@ -76,10 +76,9 @@ console.log(postes,'postesww');
               <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
               <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
               <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
-              <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
+              
+              <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
               {data?.categories.map((catdata,ind)=>(<>
-              {console.log(data.categories[ind][0].categoryName,"kufeyjdss")}
-           
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
               </>))}
             </div>
@@ -92,7 +91,7 @@ console.log(postes,'postesww');
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>
-            {console.log(data,"iyfuiyewu")}
+      
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} onClick={()=>countData(data?.id)} >
               <Image
               // loader={imageLoader}
@@ -109,7 +108,7 @@ console.log(postes,'postesww');
         </div>
         <div className="border-b border-color block my-8"></div></>}
         {((data?.coverImage!=""))&&<>
-        {console.log(data,"uytseyes")}
+       
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
           <div className="col-span-2 row-start-2 sm:row-start-1">
             <div className="flex justify-start flex-wrap items-center gap-x-4">
@@ -129,7 +128,7 @@ console.log(postes,'postesww');
           }}></div>
           </div>
           <div className="row-start-1 sm:row-start-1" key={data?.slug}>
-            {console.log(data,"iyfuiyewu")}
+   
             <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} onClick={()=>countData(data?.id)}>
               <Image
               loader={imageLoader}
