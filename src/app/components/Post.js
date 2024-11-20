@@ -9,6 +9,7 @@ import { imgaeUrl } from '../utilities/ImagePath'
 
 function Post({postes,loader,catNo,setCatNo,setPostes,setOffset,scrollX}) {
 
+
 const imageLoader = ({src}) => {
   return src
 }
@@ -56,7 +57,7 @@ const handleDescription=(data)=>{
 
 // const postesFilter = [...new Set(postes.map(JSON.stringify))].map(JSON.parse);
 
-console.log(postes,"postesss")
+
 
   return (
    <>
@@ -67,7 +68,7 @@ console.log(postes,"postesss")
          {postes?.length>0?
          <>
           {postes?.map((data,index)=>(
-         <>{console.log(data,"data")}
+         <>
          {((data?.coverImage==""))&&<>
        
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
@@ -76,7 +77,7 @@ console.log(postes,"postesss")
               <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
               <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
               <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
-              
+              <p className="text-base text-primary">{data?.author}</p>
               <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
               {data?.categories.map((catdata,ind)=>(<>
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
@@ -115,7 +116,7 @@ console.log(postes,"postesss")
               <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
               <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
               <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
-              <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.FirstName}{" "}{data?.authorDetails?.LastName}</Link>
+              <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
               {data?.categories?.map((catdata,ind)=>(<>
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
               </>))}

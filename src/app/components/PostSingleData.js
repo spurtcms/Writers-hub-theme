@@ -59,7 +59,7 @@ function PostSingleData({postSingle,params}) {
                       
       // { "slug":slug }
       let postSingle = await fetchGraphQLDa(GET_POSTS_QUERY_SINGLE,varSingle)
-      console.log(postesSingle,"postesSingleeeeeee")
+   
       setPostesSingle(postSingle)
       setLoader(false)
     }
@@ -79,7 +79,7 @@ function PostSingleData({postSingle,params}) {
       loadmore()
       reload()
     },[])
-  console.log(postSingle,"gasjgsjd")
+
   
     const imageLoader = ({src}) => {
       return src
@@ -161,8 +161,8 @@ const [isScriptLoaded, setIsScriptLoaded] = useState(false);
           <a href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></a>
             <p className="text-base text-tag-color">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
             <p className="text-base text-tag-color">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
-            <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>
-            <a className="text-base text-primary">{postesSingle?.ChannelEntryDetail?.authorDetails?.FirstName}{" "}{postesSingle?.ChannelEntryDetail?.authorDetails?.LastName}</a>
+            <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>       
+            <a className="text-base text-primary">{postesSingle?.ChannelEntryDetail?.authorDetails?.firstName}{" "}{postesSingle?.ChannelEntryDetail?.authorDetails?.lastName}</a>
            { postesSingle?.ChannelEntryDetail?.categories.length!=0&&postesSingle?.ChannelEntryDetail?.categories.map((data,ind)=>(
             <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{postesSingle?.ChannelEntryDetail?.categories[ind][0].categoryName}</div>))}
           </div>

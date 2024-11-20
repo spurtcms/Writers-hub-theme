@@ -10,6 +10,7 @@ import { fetchGraphQLCatgoData, fetchGraphQLDa } from "../api/graphicql";
 import Header from "./header";
 
 function HomeComp({posData}) {
+
     const [postes,setPostes]=useState([])
     const [categories,setCategories]=useState([])
     const [catNo,setCatNo]=useState(null)
@@ -83,16 +84,16 @@ function HomeComp({posData}) {
                 "categorySlug": catgoId,
               },
               "AdditionalData": {
-              "authorDetails": false,
+              "authorDetails": true,
                 "categories": true
               }
             }
             
             // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
-            let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,) 
+            let postData=await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos) 
   
-            
-            // handleLoad(postData)
+       
+            // handleLoad(posData)
 
             setPostes(postData?.ChannelEntriesList?.channelEntriesList)
             setLoader(false)
@@ -125,6 +126,7 @@ function HomeComp({posData}) {
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos,)
         // handleLoad(PostData) 
         // setPostes(PostData?.ChannelEntriesList?.channelEntriesList)
+
         handleLoad(PostData) 
         setLoader(false)
       }else{
@@ -146,6 +148,10 @@ function HomeComp({posData}) {
         
         // { "limit": 10, "offset": offset,"requireData":{"authorDetails":true,"categories": true},"categoryId":catgoId}
         let PostData = await fetchGraphQLDa(GET_POSTS_QUERY_ALL_LIST,varPos)
+
+
+
+
         handleLoad(PostData) 
         setLoader(false)
       }
@@ -179,9 +185,12 @@ function HomeComp({posData}) {
     },[])
 
   const handleLoad=(data)=>{
+
+    
   
   let postesArr=postes?.concat(data?.ChannelEntriesList?.channelEntriesList)
 
+  
   setPostes(postesArr)
   }
 
