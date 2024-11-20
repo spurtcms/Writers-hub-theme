@@ -69,7 +69,7 @@ const handleDescription=(data)=>{
          <>
           {postes?.map((data,index)=>(
          <>
-         {((data?.coverImage==""))&&<>
+         {((data?.coverImage==""))&&<>{console.log(data,"data")}
        
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
           <div className="col-span-2 row-start-2 sm:row-start-1">
@@ -77,7 +77,6 @@ const handleDescription=(data)=>{
               <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
               <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
               <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
-              <p className="text-base text-primary">{data?.author}</p>
               <Link href={catNo==null?`/posts/${data?.slug}`:`/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
               {data?.categories.map((catdata,ind)=>(<>
               <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>

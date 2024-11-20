@@ -40,7 +40,7 @@ function HomeComp({posData}) {
                 "categorySlug": "blog",
               },
               "AdditionalData": {
-              "authorDetails": false,
+              "authorDetails": true,
                 "categories": true
               }
             }
@@ -117,7 +117,7 @@ function HomeComp({posData}) {
             "categorySlug": "blog",
           },
           "AdditionalData": {
-          "authorDetails": false,
+          "authorDetails": true,
             "categories": true
           }
         }
@@ -141,7 +141,7 @@ function HomeComp({posData}) {
             "categorySlug": catgoId,
           },
           "AdditionalData": {
-          "authorDetails": false,
+          "authorDetails": true,
             "categories": true
           }
         }
