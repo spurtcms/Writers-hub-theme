@@ -158,7 +158,10 @@ const [isScriptLoaded, setIsScriptLoaded] = useState(false);
           
 
           <div className="flex justify-start flex-wrap items-center gap-x-4">
-          <a href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} ><img src="/img/back.svg" className="text-white"/></a>
+          <a href={cateId==null?"/":`/?catgoId=${cateId}&scroll=${scrollX}`} >
+          <img src="/img/white.svg" className="text-custom dark:block hidden"/>
+          <img src="/img/back.svg" className="text-custom dark:hidden"/>
+          </a>
             <p className="text-base text-tag-color">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
             <p className="text-base text-tag-color">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
             <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>       
