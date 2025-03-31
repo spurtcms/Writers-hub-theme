@@ -8,6 +8,7 @@ import Post from "./Post";
 import NavbarSkeleton from "../utilities/skeleton/NavbarSkeleton";
 import { fetchGraphQLCatgoData, fetchGraphQLDa } from "../api/graphicql";
 import Header from "./header";
+import { channel_name } from "../api/url";
 
 function HomeComp({ posData }) {
   const [postes, setPostes] = useState([])
@@ -33,11 +34,13 @@ function HomeComp({ posData }) {
         "commonFilter": {
           "limit": 10,
           "offset": 0,
-          "keyword": ""
+          "keyword": "",
+          
         },
         "entryFilter": {
           "Status": "Publish",
           "categorySlug": "blog",
+          "ChannelName":channel_name
         },
         "AdditionalData": {
           "authorDetails": true,
@@ -78,11 +81,13 @@ function HomeComp({ posData }) {
         "commonFilter": {
           // "limit": 10,
           // "offset": 0,
-          "keyword": ""
+          "keyword": "",
+          
         },
         "entryFilter": {
           "Status": "Publish",
           "categorySlug": catgoId,
+          "ChannelName":channel_name
         },
         "AdditionalData": {
           "authorDetails": true,
@@ -111,11 +116,13 @@ function HomeComp({ posData }) {
           "commonFilter": {
             "limit": 10,
             "offset": offset,
-            "keyword": ""
+            "keyword": "",
+             
           },
           "entryFilter": {
             "Status": "Publish",
             "categorySlug": "blog",
+            "ChannelName":channel_name
           },
           "AdditionalData": {
             "authorDetails": true,
@@ -135,11 +142,13 @@ function HomeComp({ posData }) {
           "commonFilter": {
             "limit": 10,
             "offset": offset,
-            "keyword": ""
+            "keyword": "",
+             
           },
           "entryFilter": {
             "Status": "Publish",
             "categorySlug": catgoId,
+            "ChannelName":channel_name
           },
           "AdditionalData": {
             "authorDetails": true,

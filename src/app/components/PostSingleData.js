@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { imgaeUrl } from "../utilities/ImagePath";
 import Header from "./header";
+import DOMPurify from 'dompurify';
 
 function PostSingleData({ postSingle, params }) {
 
@@ -144,6 +145,26 @@ function PostSingleData({ postSingle, params }) {
 
 
 
+   const sanitizeHTML = (html) => {
+      const sanitized = DOMPurify.sanitize(html, {
+        FORBID_TAGS: ['h1','img', 'h4'], // Remove <h1> and <img> tags
+        FORBID_ATTR: ['style'], // Remove inline styles for consistency
+      });
+      // Remove first <img> tag found in the sanitized HTML
+      console.log(sanitized, "jdbvjnvv")
+      return sanitized
+        ?.replaceAll("<br>", " ") // Replace <br> tags with spaces
+        .replaceAll(/<div className="card[^"]*"(.*?)<\/div>/g, '') // Remove specific <div> tags
+        .replaceAll(/<img[^>]*>/g, "") // Remove all <img> tags
+        .replace(/<h1[^>]*>.*?<\/h1>/, "") // Remove the first <h1> tag and its content
+        .replace(/p-\[24px_60px_10px\]/g, "") // Remove specific styles
+        .replace(/<\/?[^>]+(>|$)/g, "") // Remove all remaining HTML tags
+        .split(/\s+/) // Split text into words
+        // .slice(0, 35) // Limit to the first 35 words
+        .join(" ") // Join the words back into a string
+        .concat("...") // Add ellipsis if text is truncated
+    };
+
 
 
   return (<>
@@ -161,15 +182,15 @@ function PostSingleData({ postSingle, params }) {
               <img src="/img/white.svg" className="text-custom dark:block hidden" />
               <img src="/img/back.svg" className="text-custom dark:hidden" />
             </a>
-            <p className="text-base text-tag-color">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
-            <p className="text-base text-tag-color">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
-            <p className="text-base text-tag-color">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>
+            <p className="text-base text-tag-color dark:text-white">{moment(postesSingle?.ChannelEntryDetail?.createdOn).format("MMMM DD, YYYY")}</p>
+            <p className="text-base text-tag-color dark:text-white">{postesSingle?.ChannelEntryDetail?.readingTime} min read</p>
+            <p className="text-base text-tag-color dark:text-white">views {postesSingle?.ChannelEntryDetail?.viewCount}</p>
             <a className="text-base text-primary">{postesSingle?.ChannelEntryDetail?.authorDetails?.firstName}{" "}{postesSingle?.ChannelEntryDetail?.authorDetails?.lastName}</a>
             {postesSingle?.ChannelEntryDetail?.categories.length != 0 && postesSingle?.ChannelEntryDetail?.categories.map((data, ind) => (
               <div className="px-2 py-1 text-base text-secondary bg-secondary rounded-md">{postesSingle?.ChannelEntryDetail?.categories[ind][0].categoryName}</div>))}
           </div>
           <div className="pl-8">
-            <h1 className="sm:text-4xl text-3xl text-dark font-medium my-5">{postesSingle?.ChannelEntryDetail?.title}</h1>
+            <h1 className="sm:text-4xl text-3xl text-dark font-medium my-5 ">{postesSingle?.ChannelEntryDetail?.title}</h1>
 
             {/* <div className="block my-5 w-full h-auto img-full"  dangerouslySetInnerHTML={{
             __html:updatedImageHtml}}> */}
@@ -184,9 +205,31 @@ function PostSingleData({ postSingle, params }) {
                 className="he-image"
               />
           </div>   */}
-            <p className="text-base font-normal text-grey desc" dangerouslySetInnerHTML={{
+
+            {/* <p className="text-base font-normal text-#555555 dark:text-white" dangerouslySetInnerHTML={{
               __html: postesSingle?.ChannelEntryDetail?.description.replaceAll("<br>", " ").replace(/<h1[^>]*>|<\/h1>/gi, "").replace(/p-\[24px_60px_10px\]/g, "")
-            }}></p>
+            }}></p> */}
+
+
+              <div className="block my-5">
+              <Image
+                loader={imageLoader}
+                src={`${postesSingle?.ChannelEntryDetail?.coverImage==""?"/img/Default-image-layout.svg":postesSingle?.ChannelEntryDetail?.coverImage}`}
+                alt="spurtCMS card image"
+                width={10000}
+                height={10000}
+                priority
+                className="he-image"
+              />
+             </div>
+               <div
+                  className="pr-[12px] max-[700px]:pr-0  text-[#555555] dark:text-white"
+                  dangerouslySetInnerHTML={{
+                     __html: sanitizeHTML(postesSingle?.ChannelEntryDetail?.description)
+                   }}
+                >
+                    </div>
+                 
 
           </div>
 

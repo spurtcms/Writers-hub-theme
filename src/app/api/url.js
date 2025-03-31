@@ -1,0 +1,1 @@
+export const channel_name = process.env.NEXT_PUBLIC_CHANNEL_NAME;

@@ -105,7 +105,8 @@ body {
 } */
 
 .dark .text-gray-600{
-  color:rgb(156 163 175)
+  /* color:rgb(156 163 175) */
+  color:white
 }
 .h-image{
   width: 100% !important;

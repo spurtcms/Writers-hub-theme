@@ -1,7 +1,7 @@
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PostSkeleton from '../utilities/skeleton/PostSkeleton'
 import { fetchGraphQLDa } from '../api/graphicql'
 import { GET_COUNT } from '../api/query'
@@ -87,24 +87,25 @@ function Post({ postes, loader, catNo, setCatNo, setPostes, setOffset, scrollX }
           {postes?.length > 0 ?
             <>
               {postes?.map((data, index) => (
-                <>
+                <Fragment key={index}>
                   {((data?.coverImage == "")) && <>
                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
                       <div className="col-span-2 row-start-2 sm:row-start-1">
                         <div className="flex justify-start flex-wrap items-center gap-x-4">
-                          <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
-                          <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
-                          <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
+                          <p className="text-xss text-tag-color dark:text-white text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
+                          <p className="text-xss text-tag-color text-current dark:text-tag-white">{data?.readingTime} min read</p>
+                          <p className="text-xss text-tag-color text-current dark:text-white">views {data?.viewCount}</p>
                           <Link href={catNo == null ? `/posts/${data?.slug}` : `/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
-                          {data?.categories?.map((catdata, ind) => (<>
-                            <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
-                          </>))}
+                          {data?.categories?.map((catdata, ind) => (
+                            <Fragment key={ind}>
+                              <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
+                            </Fragment>))}
                         </div>
                         <Link href={catNo == null ? `/posts/${data?.slug}` : `/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={() => countData(data?.id)}>
                           <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>
                         </Link>
                         <p
-                          className="pr-[12px] max-[700px]:pr-0 line-clamp-3 desc text-[#555555]"
+                          className="pr-[12px] max-[700px]:pr-0 line-clamp-3 desc text-gray-600 "
                           // style={{ color: black }}
                           dangerouslySetInnerHTML={{
                             __html: sanitizeHTML(data?.description)
@@ -135,19 +136,20 @@ function Post({ postes, loader, catNo, setCatNo, setPostes, setOffset, scrollX }
                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-16 gap-y-4">
                       <div className="col-span-2 row-start-2 sm:row-start-1">
                         <div className="flex justify-start flex-wrap items-center gap-x-4">
-                          <p className="text-xss text-tag-color text-current">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
-                          <p className="text-xss text-tag-color text-current">{data?.readingTime} min read</p>
-                          <p className="text-xss text-tag-color text-current">views {data?.viewCount}</p>
+                          <p className="text-xss text-tag-color text-current dark:text-white">{moment(data?.createdOn).format("MMMM DD, YYYY")}</p>
+                          <p className="text-xss text-tag-color text-current dark:text-white">{data?.readingTime} min read</p>
+                          <p className="text-xss text-tag-color text-current dark:text-white">views {data?.viewCount}</p>
                           <Link href={catNo == null ? `/posts/${data?.slug}` : `/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="text-xss text-primary" >{data?.authorDetails?.firstName}{" "}{data?.authorDetails?.lastName}</Link>
-                          {data?.categories?.map((catdata, ind) => (<>
-                            <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
-                          </>))}
+                          {data?.categories?.map((catdata, ind) => (
+                            <Fragment key={ind}>
+                              <div className="px-2 py-1 text-xss text-secondary bg-secondary rounded-md">{data.categories[ind][0].categoryName}</div>
+                            </Fragment>))}
                         </div>
                         <Link href={catNo == null ? `/posts/${data?.slug}` : `/posts/${data?.slug}?catgoId=${catNo}&scroll=${scrollX}`} className="block mt-2 mb-4 hover:underline" onClick={() => countData(data?.id)}>
                           <h1 className="text-3xxl text-dark font-medium leading-8">{data?.title}</h1>
                         </Link>
                         <p
-                          className="pr-[12px] max-[700px]:pr-0 line-clamp-3 desc text-[#555555]"
+                          className="pr-[12px] max-[700px]:pr-0 line-clamp-3 desc text-[#555555] dark:text-white"
                           // style={{ color: black }}
                           dangerouslySetInnerHTML={{
                             __html: sanitizeHTML(data?.description)
@@ -176,7 +178,7 @@ function Post({ postes, loader, catNo, setCatNo, setPostes, setOffset, scrollX }
                     </div>
 
                     <div className="border-b border-color block my-8"></div></>}
-                </>))}
+                </Fragment>))}
             </>
             :
             <>

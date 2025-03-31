@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useState, useRef } from "react";
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -81,7 +81,7 @@ function Navbar({ categories, catNo, setCatNo, setPostes, setOffset, scrollX, se
       {scrollX !== 0 && (
         <button
           onClick={() => slide(-50)}
-          class="w-2 h-2 absolute top-[0.625rem] left-[-1.438rem]"
+          className="w-2 h-2 absolute top-[0.625rem] left-[-1.438rem]"
         >
           <Image src="/img/arrow-left-colour.svg" alt="arrow-left" width={15}
             height={15}
@@ -91,11 +91,12 @@ function Navbar({ categories, catNo, setCatNo, setPostes, setOffset, scrollX, se
       {console.log(categories, "cdjcnsdjf")}
 
       {categories?.categorylist && <>
-        <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style'>
-          <li onClick={() => handleCatList(null)} style={{ pointerEvents: catNo == null ? "none" : "" }} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId == null ? 'border-cyan-500 text-primary' : 'border-gray-200 text-gray-600'}`}> All</li>
-          {categories?.categorylist?.map((data, index) => (<>
-            <li key={index} onClick={() => handleCatList(data?.categorySlug)} style={{ pointerEvents: data?.categorySlug == catNo ? "none" : "" }} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId == data?.categorySlug ? 'border-cyan-500 text-primary' : 'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
-          </>
+        <ul ref={scrl} onScroll={scrollCheck} className='flex flex-nowrap flex-row gap-x-2 justify-start items-center overflow-scroll scrollbar-style '>
+          <li onClick={() => handleCatList(null)} style={{ pointerEvents: catNo == null ? "none" : "" }} className={`whitespace-nowrap px-6 py-2 rounded-3xl border font-base  leading-4 hover:text-white dark:hover:text-gray-400 dark:text-white hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId == null ? 'border-cyan-500 text-primary' : 'border-gray-200 text-gray-600'}`}> All</li>
+          {categories?.categorylist?.map((data, index) => (
+            <Fragment  key={index}>
+            <li  onClick={() => handleCatList(data?.categorySlug)} style={{ pointerEvents: data?.categorySlug == catNo ? "none" : "" }} className={`whitespace-nowrap px-6 py-2 rounded-3xl border dark:text-white font-base  leading-4 hover:text-white dark:hover:text-gray-400 hover:bg-gray-500 hover:border-gray-500 cursor-pointer ${catgoId == data?.categorySlug ? 'border-cyan-500 text-primary' : 'border-gray-200 text-gray-600'}`}> {data.categoryName} </li>
+          </Fragment>
           ))}
         </ul>
       </>
@@ -106,7 +107,7 @@ function Navbar({ categories, catNo, setCatNo, setPostes, setOffset, scrollX, se
 
         <button
           onClick={() => slide(+50)}
-          class="w-2 h-2 absolute top-[0.625rem] right-[-1.438rem]"
+          className="w-2 h-2 absolute top-[0.625rem] right-[-1.438rem]"
         >
           <Image src="/img/arrow-right-colour.svg" alt="arrow-right" width={15}
             height={15}

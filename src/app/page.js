@@ -2,17 +2,20 @@ import { Suspense } from "react";
 import HomeComp from "./components/Home";
 import { GET_POSTS_QUERY_ALL_LIST, GET_POSTS_QUERY_CATEGORY } from "./api/query";
 import { fetchGraphQLCatgoData, fetchGraphQLDa } from "./api/graphicql";
+import { channel_name } from "./api/url";
 
 export default async function Home() {
   let varPos = {
     "commonFilter": {
       "limit": 10,
       "offset": 0,
-      "keyword": ""
+      "keyword": "",
+       
     },
     "entryFilter": {
       "Status": "Publish",
       "categorySlug": "blog",
+      "ChannelName":channel_name
     },
     "AdditionalData": {
       "authorDetails": false,
